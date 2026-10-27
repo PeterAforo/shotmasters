@@ -34,7 +34,9 @@ const FALLBACK_NAV = [
     { label: 'News', href: '/news' },
     { label: 'Partnerships', href: '/partnerships' },
   ]},
-  { label: 'Gallery & Media', href: '/gallery' },
+  { label: 'Media', children: [
+    { label: 'Gallery', href: '/gallery' },
+  ]},
   { label: 'Sports Tourism & Community', href: '/tourism' },
   { label: 'Contact', href: '/contact' },
 ]

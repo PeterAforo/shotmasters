@@ -189,7 +189,11 @@ async function main() {
             { label: 'Partnerships', href: '/partnerships' },
           ],
         },
-        { label: 'Gallery & Media', href: '/gallery', kind: 'link' },
+        {
+          label: 'Media',
+          kind: 'group',
+          children: [{ label: 'Gallery', href: '/gallery' }],
+        },
         { label: 'Sports Tourism & Community', href: '/tourism', kind: 'link' },
         { label: 'Contact', href: '/contact', kind: 'link' },
       ],
