@@ -70,6 +70,7 @@ export function HeroSlider({ slides }: { slides?: Slide[] | null }) {
       onMouseLeave={() => setPaused(false)}
     >
       <div className="w-full">
+        <p className="eyebrow mb-6">People · Play · Passion</p>
         <AnimatePresence mode="wait">
           <motion.div key={index} className="overflow-hidden">
             <motion.h1

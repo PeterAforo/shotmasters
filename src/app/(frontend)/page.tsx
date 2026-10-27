@@ -248,7 +248,7 @@ export default async function HomePage() {
       {/* ── LEADERBOARD PREVIEW ──────────────────────── */}
       {sections.showLeaderboard !== false && rankings.docs.length > 0 && (
         <section className="relative bg-[#0a0f1e] py-24">
-          <ParallaxBg src={IMG.table} scrim="rgba(10,15,30,0.84)" />
+          <ParallaxBg src={IMG.room} scrim="rgba(10,15,30,0.84)" />
           <div className="relative mx-auto max-w-5xl px-5 sm:px-8">
             <SectionHeading eyebrow="The Order" title="CLUB LEADERBOARD" align="center" tone="dark" />
             <div className="card-surface overflow-hidden">

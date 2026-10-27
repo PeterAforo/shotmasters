@@ -24,6 +24,8 @@ import { GalleryItems } from './collections/GalleryItems'
 import { SiteSettings } from './globals/SiteSettings'
 import { Navigation } from './globals/Navigation'
 import { HomePage } from './globals/HomePage'
+import { TourismPage } from './globals/TourismPage'
+import { PartnershipsPage } from './globals/PartnershipsPage'
 import { cloudinaryAdapter, cloudinaryConfigured } from './lib/cloudinaryAdapter'
 
 const filename = fileURLToPath(import.meta.url)
@@ -58,7 +60,7 @@ export default buildConfig({
     Posts,
     GalleryItems,
   ],
-  globals: [SiteSettings, Navigation, HomePage],
+  globals: [SiteSettings, Navigation, HomePage, TourismPage, PartnershipsPage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

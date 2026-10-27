@@ -6,8 +6,8 @@
   --color-surface-2: #edeae1;
   --color-line: #e3dfd4;
   --color-felt: #0e5c3f;
-  --color-cyan-neon: #0891b2;
-  --color-green-neon: #16a34a;
+  --color-cyan-neon: #2563eb;
+  --color-green-neon: #1d4ed8;
   --color-pink-neon: #db2777;
   --color-orange-neon: #ea580c;
   --color-gold: #b45309;
@@ -96,11 +96,11 @@ body {
   color: #ffffff;
   background: var(--color-cyan-neon);
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s;
-  box-shadow: 0 0 0 0 rgba(8, 145, 178, 0);
+  box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
 }
 .btn-primary:hover {
   transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 12px 40px -8px rgba(8, 145, 178, 0.45);
+  box-shadow: 0 12px 40px -8px rgba(37, 99, 235, 0.45);
 }
 
 .btn-ghost {
@@ -120,7 +120,7 @@ body {
 }
 .btn-ghost:hover {
   border-color: var(--color-cyan-neon);
-  background: rgba(8, 145, 178, 0.06);
+  background: rgba(37, 99, 235, 0.06);
   transform: translateY(-2px);
 }
 
@@ -145,7 +145,7 @@ body {
 .input-field:focus {
   outline: none;
   border-color: var(--color-cyan-neon);
-  box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.15);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 @media (prefers-reduced-motion: reduce) {

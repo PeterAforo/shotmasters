@@ -1,10 +1,11 @@
 /** Local stylized billiard artwork (public/textures) — used as CMS-empty fallbacks. */
 export const IMG = {
-  hall: '/textures/hall.svg',
-  balls: '/textures/balls.svg',
-  table: '/textures/table.svg',
+  hall: '/media/img-02.jpg',
+  balls: '/media/img-05.jpg',
+  room: '/media/img-03.jpg',
+  crowd: '/media/img-04.jpg',
   bokeh: '/textures/bokeh.svg',
 } as const
 
-export const TABLE_FALLBACKS = [IMG.table, IMG.hall, IMG.balls]
-export const GALLERY_FALLBACKS = [IMG.balls, IMG.table, IMG.hall, IMG.bokeh]
+export const TABLE_FALLBACKS = [IMG.room, IMG.hall, IMG.balls]
+export const GALLERY_FALLBACKS = [IMG.balls, IMG.hall, IMG.room, IMG.crowd]

@@ -112,11 +112,15 @@ export interface Config {
     'site-settings': SiteSetting;
     navigation: Navigation;
     'home-page': HomePage;
+    'tourism-page': TourismPage;
+    'partnerships-page': PartnershipsPage;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     navigation: NavigationSelect<false> | NavigationSelect<true>;
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
+    'tourism-page': TourismPageSelect<false> | TourismPageSelect<true>;
+    'partnerships-page': PartnershipsPageSelect<false> | PartnershipsPageSelect<true>;
   };
   locale: null;
   widgets: {
@@ -1105,6 +1109,42 @@ export interface HomePage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tourism-page".
+ */
+export interface TourismPage {
+  id: number;
+  intro?: string | null;
+  blocks?:
+    | {
+        title: string;
+        body: string;
+        image?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partnerships-page".
+ */
+export interface PartnershipsPage {
+  id: number;
+  intro?: string | null;
+  opportunities?:
+    | {
+        title: string;
+        body: string;
+        id?: string | null;
+      }[]
+    | null;
+  enquiryEmail?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
@@ -1193,6 +1233,42 @@ export interface HomePageSelect<T extends boolean = true> {
         showLeaderboard?: T;
         showGallery?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tourism-page_select".
+ */
+export interface TourismPageSelect<T extends boolean = true> {
+  intro?: T;
+  blocks?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        image?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partnerships-page_select".
+ */
+export interface PartnershipsPageSelect<T extends boolean = true> {
+  intro?: T;
+  opportunities?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        id?: T;
+      };
+  enquiryEmail?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
