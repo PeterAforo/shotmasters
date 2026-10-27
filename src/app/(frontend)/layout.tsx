@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 
 const FALLBACK_NAV = [
   { label: 'Home', href: '/' },
-  { label: 'About SMCC', href: '/about' },
+  { label: 'About', href: '/about' },
   { label: 'Membership', href: '/membership' },
   { label: 'The Club', children: [
     { label: 'Tournaments', href: '/tournaments' },
@@ -58,7 +58,7 @@ export default async function FrontendLayout({
           <PageTransition>
             <Header
               navItems={navItems}
-              cta={{ label: nav?.ctaLabel || 'Join SMCC', href: nav?.ctaHref || '/membership' }}
+              cta={{ label: nav?.ctaLabel || 'Join', href: nav?.ctaHref || '/membership' }}
             />
             <main>{children}</main>
             <Footer settings={settings} navItems={footerNav} />

@@ -177,7 +177,7 @@ async function main() {
     data: {
       navItems: [
         { label: 'Home', href: '/', kind: 'link' },
-        { label: 'About SMCC', href: '/about', kind: 'link' },
+        { label: 'About', href: '/about', kind: 'link' },
         { label: 'Membership', href: '/membership', kind: 'link' },
         {
           label: 'The Club',
@@ -193,7 +193,7 @@ async function main() {
         { label: 'Sports Tourism & Community', href: '/tourism', kind: 'link' },
         { label: 'Contact', href: '/contact', kind: 'link' },
       ],
-      ctaLabel: 'Join SMCC',
+      ctaLabel: 'Join',
       ctaHref: '/membership',
     },
     overrideAccess: true,
