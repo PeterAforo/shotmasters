@@ -38,14 +38,14 @@ export function VideoLightbox({ poster, src, alt }: { poster: string; src: strin
             onClick={() => setOpen(false)}
           >
             <motion.div
-              className="relative flex h-[600px] max-h-[92vh] w-[600px] max-w-[92vw] items-center overflow-hidden rounded-2xl"
+              className="relative w-full max-w-4xl overflow-hidden rounded-2xl"
               initial={{ scale: 0.9, y: 24 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 12 }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <video src={src} controls autoPlay playsInline className="w-full bg-black object-contain" />
+              <video src={src} controls autoPlay playsInline className="aspect-video w-full bg-black" />
               <button
                 onClick={() => setOpen(false)}
                 className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-night/70 text-white transition hover:bg-night"
