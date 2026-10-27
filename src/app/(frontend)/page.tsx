@@ -5,26 +5,21 @@ import { ParallaxBg } from '@/components/anim/ParallaxBg'
 import { IMG, TABLE_FALLBACKS, GALLERY_FALLBACKS } from '@/lib/imagery'
 import { HeroSlider } from '@/components/site/HeroSlider'
 import { Marquee } from '@/components/anim/Marquee'
-import { Counter } from '@/components/anim/Counter'
 import { Reveal } from '@/components/anim/Reveal'
 import { TiltCard } from '@/components/anim/TiltCard'
 import { SectionHeading } from '@/components/site/SectionHeading'
 import { TransitionLink } from '@/components/anim/PageTransition'
-import { Magnetic } from '@/components/anim/Magnetic'
 
 export const revalidate = 60
 
 export default async function HomePage() {
   const payload = await getPayloadClient()
 
-  const [home, settings, tables, plans, tournaments, rankings, gallery] = await Promise.all([
+  const [home, settings, tables, tournaments, rankings, gallery] = await Promise.all([
     getHomePage().catch(() => null),
     getSiteSettings().catch(() => null),
     payload
       .find({ collection: 'tables', where: { status: { equals: 'available' } }, sort: 'sortOrder', limit: 6 })
-      .catch(() => ({ docs: [] })),
-    payload
-      .find({ collection: 'membership-plans', sort: 'sortOrder', limit: 3 })
       .catch(() => ({ docs: [] })),
     payload
       .find({
@@ -39,14 +34,6 @@ export default async function HomePage() {
   ])
 
   const sections = home?.sections ?? {}
-  const stats = home?.stats?.length
-    ? home.stats
-    : [
-        { label: 'Pro Tables', value: tables.docs.length || 6, suffix: '' },
-        { label: 'Members', value: 120, suffix: '+' },
-        { label: 'Tournaments / Year', value: 24, suffix: '' },
-        { label: 'High Break', value: 147, suffix: '' },
-      ]
 
   return (
     <>
@@ -89,28 +76,6 @@ export default async function HomePage() {
             About SMCC →
           </TransitionLink>
         </Reveal>
-      </section>
-
-      {/* ── 04 SPORTING ACHIEVEMENTS ─────────────────── */}
-      <section className="relative bg-[#e8f2ef]">
-        <ParallaxBg src={IMG.balls} scrim="rgba(232,242,239,0.88)" />
-        <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8">
-        <Reveal>
-          <div className="eyebrow mb-8 text-center">Sporting Achievements</div>
-        </Reveal>
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-          {stats.map((s, i) => (
-            <Reveal key={i} delay={i * 0.08}>
-              <div className="card-surface p-6 text-center">
-                <div className="font-display text-5xl text-gradient-rainbow sm:text-6xl">
-                  <Counter value={s.value ?? 0} suffix={s.suffix ?? ''} />
-                </div>
-                <div className="mt-2 text-xs uppercase tracking-[0.2em] text-muted">{s.label}</div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-        </div>
       </section>
 
       {/* ── TABLES ───────────────────────────────────── */}
@@ -254,58 +219,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── MEMBERSHIP TEASER ────────────────────────── */}
-      {sections.showMembership !== false && plans.docs.length > 0 && (
-        <section className="relative bg-[#0d3b2e] py-24">
-          <ParallaxBg src={IMG.hall} scrim="rgba(13,59,46,0.80)" />
-          <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
-            <SectionHeading
-              eyebrow="Membership"
-              title="PLAY MORE. PAY LESS."
-              sub="Member rates, priority booking, and a standing invitation to every club night."
-              align="center"
-              tone="dark"
-            />
-            <div className="grid gap-6 md:grid-cols-3">
-              {plans.docs.map((p, i) => (
-                <Reveal key={p.id} delay={i * 0.1}>
-                  <div
-                    className={`card-surface relative h-full p-8 transition-transform duration-300 hover:-translate-y-2 ${
-                      p.featured ? 'border-cyan-neon shadow-[0_0_50px_-12px_rgba(34,211,238,0.35)]' : ''
-                    }`}
-                  >
-                    {p.featured && (
-                      <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-cyan-neon to-green-neon px-4 py-1 text-[10px] font-bold uppercase tracking-widest text-paper">
-                        Most Popular
-                      </span>
-                    )}
-                    <h3 className="font-display text-2xl text-ink">{p.name}</h3>
-                    <div className="mt-4">
-                      <span className="font-display text-5xl text-gradient-rainbow">{formatGHS(p.priceGHS)}</span>
-                      <span className="ml-2 text-sm text-muted">/{p.interval}</span>
-                    </div>
-                    {p.perks?.length ? (
-                      <ul className="mt-6 space-y-3">
-                        {p.perks.map((perk, j) => (
-                          <li key={j} className="flex gap-3 text-sm text-muted">
-                            <span className="text-green-neon">✓</span> {perk.perk}
-                          </li>
-                        ))}
-                      </ul>
-                    ) : null}
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-            <Reveal className="mt-10 text-center">
-              <Magnetic>
-                <TransitionLink href="/membership" className="btn-primary">Become a Member</TransitionLink>
-              </Magnetic>
-            </Reveal>
-          </div>
-        </section>
-      )}
-
       {/* ── LEADERBOARD PREVIEW ──────────────────────── */}
       {sections.showLeaderboard !== false && rankings.docs.length > 0 && (
         <section className="relative bg-[#0a0f1e] py-24">
@@ -368,32 +281,6 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* ── CTA ──────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-[#b45309] py-32">
-        <ParallaxBg src={IMG.balls} scrim="rgba(180,83,9,0.85)" />
-        <div className="relative mx-auto max-w-4xl px-5 text-center sm:px-8">
-          <Reveal>
-            <h2 className="font-display text-5xl leading-[0.95] text-white sm:text-7xl">
-              YOUR TABLE<br />
-              <span className="text-[#101528]">IS WAITING</span>
-            </h2>
-            <p className="mx-auto mt-6 max-w-md text-white/85">
-              Walk-ins welcome, but the smart money books ahead. Deposit online, play on arrival.
-            </p>
-            <div className="mt-10 flex flex-wrap justify-center gap-4">
-              <Magnetic>
-                <TransitionLink href="/membership" className="btn-primary">Join SMCC</TransitionLink>
-              </Magnetic>
-              <Magnetic strength={0.25}>
-                <TransitionLink href="/partnerships" className="btn-ghost">Partner With Us</TransitionLink>
-              </Magnetic>
-              <Magnetic strength={0.25}>
-                <TransitionLink href="/contact" className="btn-ghost">Contact</TransitionLink>
-              </Magnetic>
-            </div>
-          </Reveal>
-        </div>
-      </section>
     </>
   )
 }
