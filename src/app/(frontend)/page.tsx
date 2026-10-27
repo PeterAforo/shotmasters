@@ -16,7 +16,7 @@ export const revalidate = 60
 export default async function HomePage() {
   const payload = await getPayloadClient()
 
-  const [home, settings, tables, tournaments, rankings, gallery] = await Promise.all([
+  const [home, settings, tables, tournaments, gallery] = await Promise.all([
     getHomePage().catch(() => null),
     getSiteSettings().catch(() => null),
     payload
@@ -30,7 +30,6 @@ export default async function HomePage() {
         limit: 3,
       })
       .catch(() => ({ docs: [] })),
-    payload.find({ collection: 'rankings', sort: 'rank', limit: 5 }).catch(() => ({ docs: [] })),
     payload.find({ collection: 'gallery-items', sort: 'sortOrder', limit: 8 }).catch(() => ({ docs: [] })),
   ])
 
@@ -229,28 +228,6 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* ── 06 PEOPLE · PLAY · PASSION ────────────────── */}
-      <section className="relative bg-[#0d3b2e] py-20">
-        <ParallaxBg src={IMG.crowd} scrim="rgba(13,59,46,0.82)" />
-        <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
-          <SectionHeading eyebrow="Our Values" title="PEOPLE · PLAY · PASSION" align="center" tone="dark" />
-          <div className="grid gap-6 md:grid-cols-3">
-            {[
-              { k: 'People', d: 'Friendship, sportsmanship and a community where every player belongs.' },
-              { k: 'Play', d: 'Structured International 8-Ball — leagues, tournaments, coaching and open play.' },
-              { k: 'Passion', d: 'The love of the game that built us — shared with Accra and beyond.' },
-            ].map((v, i) => (
-              <Reveal key={v.k} delay={i * 0.1}>
-                <div className="card-surface h-full bg-surface/95 p-8 text-center">
-                  <div className="font-display text-4xl text-cyan-neon">{v.k}</div>
-                  <p className="mt-3 text-sm leading-relaxed text-muted">{v.d}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── 07 SPORTS TOURISM & COMMUNITY teaser ─────── */}
       <section className="relative overflow-hidden bg-[#0a0f1e] py-20">
         <ParallaxBg src={IMG.hall} scrim="rgba(10,15,30,0.82)" />
@@ -268,34 +245,6 @@ export default async function HomePage() {
           </Reveal>
         </div>
       </section>
-
-      {/* ── LEADERBOARD PREVIEW ──────────────────────── */}
-      {sections.showLeaderboard !== false && rankings.docs.length > 0 && (
-        <section className="relative bg-[#0a0f1e] py-24">
-          <ParallaxBg src={IMG.room} scrim="rgba(10,15,30,0.84)" />
-          <div className="relative mx-auto max-w-5xl px-5 sm:px-8">
-            <SectionHeading eyebrow="The Order" title="CLUB LEADERBOARD" align="center" tone="dark" />
-            <div className="card-surface overflow-hidden">
-              {rankings.docs.map((r, i) => (
-                <Reveal key={r.id} delay={i * 0.05}>
-                  <div className="flex items-center gap-5 border-b border-line px-6 py-4 last:border-0">
-                    <span className={`font-display w-10 text-2xl ${i === 0 ? 'text-gold' : i === 1 ? 'text-ink' : i === 2 ? 'text-orange-neon' : 'text-muted'}`}>
-                      {r.rank}
-                    </span>
-                    <span className="flex-1 font-semibold text-ink">{r.playerName}</span>
-                    <span className="hidden text-xs text-muted sm:block">{r.wins}W · {r.losses}L</span>
-                    <span className="text-xs text-muted">HB <span className="text-cyan-neon">{r.highBreak}</span></span>
-                    <span className="font-display text-lg text-ink">{r.points}</span>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-            <Reveal className="mt-8 text-center">
-              <TransitionLink href="/leaderboard" className="btn-ghost">Full Leaderboard</TransitionLink>
-            </Reveal>
-          </div>
-        </section>
-      )}
 
       {/* ── GALLERY STRIP ────────────────────────────── */}
       {sections.showGallery !== false && gallery.docs.length > 0 && (
