@@ -60,22 +60,77 @@ export default async function HomePage() {
 
       <Marquee text={settings?.marqueeText || 'SHOT MASTERS CUE CLUB • CHAMPIONSHIP TABLES • OPEN DAILY • ACCRA'} />
 
-      {/* ── 03 OUR CLUB — intro ─────────────────────── */}
-      <section className="mx-auto max-w-4xl px-5 py-20 text-center sm:px-8">
-        <Reveal>
-          <div className="eyebrow">Our Club</div>
-          <p className="mt-6 text-lg leading-relaxed text-muted">
-            Shot Masters Cue Club is a professional cue-sports club and social community in
-            Accra, Ghana. Born from Two Shots Pool Club, we&apos;ve grown into structured
-            International 8-Ball league play, anniversary tournaments and open nights that
-            bring together players, families and fans. Beyond the tables we invest in
-            community — charitable outreach, sports tourism and a welcoming home for anyone
-            who loves the game.
-          </p>
-          <TransitionLink href="/about" className="mt-8 inline-block btn-ghost">
-            About SMCC →
-          </TransitionLink>
-        </Reveal>
+      {/* ── 03 OUR CLUB — intro (mockup layout) ─────── */}
+      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
+        {/* headline row: left title, right dual text columns */}
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-start">
+          <Reveal>
+            <div>
+              <span className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-ink">
+                <span className="h-1.5 w-1.5 rounded-full bg-cyan-neon" />
+                About Us
+              </span>
+              <h2 className="mt-6 font-display text-5xl leading-[1.02] sm:text-6xl">
+                <span className="text-cyan-neon">Welcome To</span>
+                <br />
+                <span className="text-ink">Shot Masters!</span>
+              </h2>
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="grid gap-6 text-sm leading-relaxed text-muted sm:grid-cols-2 sm:pt-16">
+              <p>
+                Shot Masters Cue Club is a professional cue-sports club and social community
+                in Accra, Ghana. Born from Two Shots Pool Club, we&apos;ve grown into structured
+                International 8-Ball league play, anniversary tournaments and open nights.
+              </p>
+              <p>
+                Beyond the tables we invest in community — charitable outreach, sports tourism
+                and a welcoming home for anyone who loves the game, from first-timers to veterans.
+              </p>
+            </div>
+          </Reveal>
+        </div>
+
+        {/* feature cards */}
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
+          {[
+            { k: 'People', d: 'Friendship, sportsmanship and a community where every player belongs.', icon: 'M16 19c-2.5 0-4.5-2-4.5-4.5S13.5 10 16 10s4.5 2 4.5 4.5S18.5 19 16 19Zm-8 0c-2.5 0-4.5-2-4.5-4.5S5.5 10 8 10s4.5 2 4.5 4.5S10.5 19 8 19Zm4-13a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z', accent: 'bg-cyan-neon' },
+            { k: 'Play', d: 'Structured International 8-Ball — leagues, tournaments, coaching and open play.', icon: 'M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20Zm0-14a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z', accent: 'bg-ink' },
+            { k: 'Passion', d: 'The love of the game that built us — shared with Accra and beyond.', icon: 'M12 21s-7.5-4.6-9.8-9.2C.6 8.4 2.5 5 6 5c2.2 0 3.6 1.2 4.4 2.4h3.2C14.4 6.2 15.8 5 18 5c3.5 0 5.4 3.4 3.8 6.8C19.5 16.4 12 21 12 21Z', accent: 'bg-cyan-neon' },
+          ].map((f, i) => (
+            <Reveal key={f.k} delay={i * 0.1}>
+              <div className="card-surface h-full p-7">
+                <div className={`flex h-14 w-14 items-center justify-center rounded-full ${f.accent}`}>
+                  <svg viewBox="0 0 24 24" className="h-6 w-6 fill-white"><path d={f.icon} /></svg>
+                </div>
+                <h3 className="mt-5 font-display text-xl text-ink">{f.k}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{f.d}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        {/* image + overlapping video card */}
+        <div className="relative mt-16 pb-12">
+          <Reveal>
+            <div className="h-[420px] w-[68%] overflow-hidden rounded-2xl">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/media/img-01.jpg" alt="SMCC club night" className="h-full w-full object-cover" />
+            </div>
+          </Reveal>
+          <Reveal delay={0.15} className="absolute -bottom-10 right-0 w-[45%] min-w-[280px]">
+            <TransitionLink href="/gallery" className="group relative block overflow-hidden rounded-2xl border-4 border-paper shadow-[0_30px_60px_-20px_rgba(10,15,30,0.45)]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/media/img-04.jpg" alt="Watch SMCC highlights" className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <span className="absolute inset-0 flex items-center justify-center bg-night/30">
+                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-gold transition-transform duration-300 group-hover:scale-110">
+                  <svg viewBox="0 0 24 24" className="ml-1 h-6 w-6 fill-white"><path d="M8 5v14l11-7z" /></svg>
+                </span>
+              </span>
+            </TransitionLink>
+          </Reveal>
+        </div>
       </section>
 
       {/* ── TABLES ───────────────────────────────────── */}
