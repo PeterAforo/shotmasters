@@ -1,4 +1,5 @@
 import { waLink, waMessages } from '@/lib/whatsapp'
+import { NewsletterForm } from '@/components/site/NewsletterForm'
 
 type Settings = {
   clubName?: string | null
@@ -83,6 +84,11 @@ export function Footer({ settings, navItems }: { settings: Settings | null; navI
           </div>
         </div>
 
+        <div className="mt-14 flex flex-col gap-3">
+          <h3 className="eyebrow">Stay in the loop</h3>
+          <NewsletterForm />
+        </div>
+
         <div className="mt-16 overflow-hidden">
           <div className="select-none font-display text-[8.5vw] leading-[0.9] text-white/5 md:text-[6vw]">
             SHOT&nbsp;MASTERS<br />CUE&nbsp;CLUB
@@ -91,7 +97,10 @@ export function Footer({ settings, navItems }: { settings: Settings | null; navI
 
         <div className="mt-6 flex flex-col items-start justify-between gap-3 border-t border-white/10 pt-6 text-xs text-white/50 sm:flex-row sm:items-center">
           <span>© {new Date().getFullYear()} {name}. All rights reserved.</span>
-          <span>Accra · Ghana 🇬🇭</span>
+          <span className="flex gap-5">
+            <a href="/privacy" className="transition-colors hover:text-white">Privacy Policy</a>
+            <span>Accra · Ghana 🇬🇭</span>
+          </span>
         </div>
       </div>
     </footer>

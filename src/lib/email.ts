@@ -57,7 +57,7 @@ export const sendTournamentEntry = (to: string, d: { name: string; tournament: s
     <table>${row('Tournament', d.tournament)}${row('Date', d.date)}</table>
     <p style="margin-top:20px;color:#94a3b8">Arrive 30 minutes early for the draw. Good luck at the table.</p>`))
 
-export const sendContactNotification = (d: { name: string; email: string; message: string }) =>
+export const sendContactNotification = (d: { name: string; email: string; message: string; subject?: string }) =>
   send(
     process.env.CONTACT_EMAIL || 'info@shotmasters.club',
     `?? New contact: ${d.name}`,

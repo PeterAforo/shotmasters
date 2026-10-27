@@ -17,6 +17,7 @@ export function ContactForm() {
         email: form.get('email'),
         subject: form.get('subject'),
         message: form.get('message'),
+        website: form.get('website'),
       }),
     })
     setStatus(res.ok ? 'sent' : 'error')
@@ -32,7 +33,15 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-5">
+    <form onSubmit={onSubmit} className="relative space-y-5">
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-[9999px] h-0 w-0 opacity-0"
+      />
       <div>
         <label className="eyebrow mb-2 block">Name</label>
         <input name="name" required className="input-field" placeholder="Your name" />
@@ -57,7 +66,7 @@ export function ContactForm() {
       </div>
       <label className="flex items-start gap-3 text-xs text-muted">
         <input type="checkbox" required className="mt-0.5 accent-[#2563eb]" />
-        I consent to SMCC storing my details to respond to this enquiry.
+        I consent to SMCC storing my details to respond to this enquiry (<a href="/privacy" className="underline">privacy policy</a>).
       </label>
       {status === 'error' && <p className="text-sm text-pink-neon">Something went wrong — try WhatsApp instead.</p>}
       <button type="submit" disabled={status === 'sending'} className="btn-primary disabled:opacity-50">

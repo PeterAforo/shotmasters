@@ -16,7 +16,7 @@ export const revalidate = 60
 export default async function HomePage() {
   const payload = await getPayloadClient()
 
-  const [home, settings, tables, tournaments, gallery] = await Promise.all([
+  const [home, settings, tables, tournaments, gallery, posts] = await Promise.all([
     getHomePage().catch(() => null),
     getSiteSettings().catch(() => null),
     payload
@@ -31,6 +31,9 @@ export default async function HomePage() {
       })
       .catch(() => ({ docs: [] })),
     payload.find({ collection: 'gallery-items', sort: 'sortOrder', limit: 8 }).catch(() => ({ docs: [] })),
+    payload
+      .find({ collection: 'posts', where: { status: { equals: 'published' } }, sort: '-publishedAt', limit: 3 })
+      .catch(() => ({ docs: [] })),
   ])
 
   const sections = home?.sections ?? {}
@@ -252,6 +255,36 @@ export default async function HomePage() {
           </Reveal>
         </div>
       </section>
+
+      {/* ── LATEST NEWS ─────────────────────────────── */}
+      {posts.docs.length > 0 && (
+        <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
+          <SectionHeading
+            eyebrow="News & Announcements"
+            title="LATEST FROM THE CLUB"
+            sub="Club news, results and announcements."
+          />
+          <div className="grid gap-6 md:grid-cols-3">
+            {posts.docs.map((p, i) => (
+              <Reveal key={p.id} delay={i * 0.08}>
+                <TransitionLink href={`/news/${p.slug}`} className="card-surface group flex h-full flex-col p-6">
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-cyan-neon">{p.category || 'News'}</div>
+                  <h3 className="mt-3 font-display text-xl text-ink transition-colors group-hover:text-cyan-neon">{p.title}</h3>
+                  {p.excerpt && <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted">{p.excerpt}</p>}
+                  <span className="mt-auto pt-4 text-xs font-bold uppercase tracking-widest text-muted">
+                    {p.publishedAt ? new Date(p.publishedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : ''}
+                  </span>
+                </TransitionLink>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal className="mt-8">
+            <TransitionLink href="/news" className="text-sm font-semibold text-cyan-neon hover:underline">
+              All news →
+            </TransitionLink>
+          </Reveal>
+        </section>
+      )}
 
       {/* ── GALLERY STRIP ────────────────────────────── */}
       {sections.showGallery !== false && gallery.docs.length > 0 && (
