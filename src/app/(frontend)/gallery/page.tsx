@@ -3,6 +3,7 @@ import { getPayloadClient } from '@/lib/payload'
 import { SectionHeading } from '@/components/site/SectionHeading'
 import { Reveal } from '@/components/anim/Reveal'
 import { mediaUrl } from '@/lib/utils'
+import { GALLERY_FALLBACKS } from '@/lib/imagery'
 
 export const metadata: Metadata = { title: 'Gallery' }
 export const revalidate = 60
@@ -26,7 +27,7 @@ export default async function GalleryPage() {
       ) : (
         <div className="columns-1 gap-4 sm:columns-2 lg:columns-3 [&>*]:mb-4">
           {docs.map((g, i) => {
-            const img = mediaUrl(g.image)
+            const img = mediaUrl(g.image) || GALLERY_FALLBACKS[i % GALLERY_FALLBACKS.length]
             return (
               <Reveal key={g.id} delay={(i % 3) * 0.07} className="break-inside-avoid">
                 <figure className="card-surface group overflow-hidden">
@@ -54,6 +55,17 @@ export default async function GalleryPage() {
           })}
         </div>
       )}
+
+      <Reveal className="mt-16">
+        <h3 className="font-display text-2xl text-ink">VIDEO HIGHLIGHTS</h3>
+        <div className="mt-6 grid gap-6 md:grid-cols-2">
+          {['/media/video-01.mp4', '/media/video-02.mp4'].map((src) => (
+            <figure key={src} className="card-surface overflow-hidden">
+              <video src={src} controls playsInline preload="metadata" className="aspect-video w-full bg-night object-cover" />
+            </figure>
+          ))}
+        </div>
+      </Reveal>
     </div>
   )
 }

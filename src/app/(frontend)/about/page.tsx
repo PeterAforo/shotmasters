@@ -4,54 +4,98 @@ import { Reveal } from '@/components/anim/Reveal'
 import { SectionHeading } from '@/components/site/SectionHeading'
 import { TransitionLink } from '@/components/anim/PageTransition'
 
-export const metadata: Metadata = { title: 'About' }
+export const metadata: Metadata = { title: 'About SMCC' }
+
+const MILESTONES = [
+  { year: '2024', text: 'The club is formed and hosts its maiden tournament.' },
+  { year: '2025', text: 'Successful International 8-Ball league; Two Shots Pool Club rebrands as Shot Masters Cue Club.' },
+  { year: '2025', text: 'First anniversary tournament draws the community together.' },
+  { year: '2026', text: 'Second anniversary open play — and the December Cue Festival on the horizon.' },
+]
+
+const GOVERNANCE = [
+  { role: 'President' },
+  { role: 'General Secretary' },
+  { role: 'Treasurer' },
+  { role: 'Executive Committee' },
+]
 
 export default async function AboutPage() {
   const settings = await getSiteSettings().catch(() => null)
 
   return (
-    <div className="mx-auto max-w-7xl px-5 pb-24 pt-36 sm:px-8">
+    <div className="mx-auto max-w-7xl px-5 pb-24 sm:px-8">
       <SectionHeading
-        eyebrow="Our Story"
-        title="BUILT FOR THE LOVE OF THE GAME"
-        sub={settings?.tagline || 'Accra’s home of championship snooker'}
+        eyebrow="About SMCC"
+        title="PEOPLE · PLAY · PASSION"
+        sub={settings?.tagline || 'A professional cue-sports club and social community in Accra, Ghana'}
       />
 
       <div className="grid gap-12 lg:grid-cols-2">
         <Reveal>
-          <div className="space-y-5 text-muted leading-relaxed">
+          <div className="space-y-5 leading-relaxed text-muted">
             <p>
-              Shot Masters Cue Club opened its doors with a simple obsession: bring
-              world-class cue sports to Accra. Not a side-room afterthought — a dedicated
-              arena with championship-grade tables, pro lighting and cloth that plays true.
+              Shot Masters Cue Club (SMCC) brings together cue-sports excellence, social
+              connection, sustainability and charity — a professional sporting community
+              that gives back through sport.
             </p>
             <p>
-              Whether you&apos;re a first-timer learning your stance or a shark running a
-              century break, there&apos;s a table — and a community — waiting for you.
-              Weekly tournaments, coaching sessions, and member nights keep the felt busy
-              every single week.
+              Our story began as Two Shots Pool Club — a group of friends and competitors
+              bound by the game. As the community grew, so did our ambition: structured
+              league play, an anniversary tradition, and a name worthy of it. Shot Masters
+              Cue Club is that next chapter.
             </p>
             <p>
-              This is more than a pool hall. It&apos;s where Accra&apos;s cue sports scene lives.
+              We play recognised International 8-Ball rules and take player education
+              seriously — every member, from first-timer to veteran, gets the support to
+              grow their game.
             </p>
           </div>
         </Reveal>
         <Reveal delay={0.15}>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             {[
-              { k: 'Championship tables', v: 'Snooker & pool' },
-              { k: 'Weekly events', v: 'Tournaments & nights' },
-              { k: 'Member rates', v: 'Priority booking' },
-              { k: 'Open daily', v: '10:00 – 23:00' },
-            ].map((f, i) => (
-              <div key={i} className="card-surface p-6">
-                <div className="text-xs uppercase tracking-widest text-cyan-neon">{f.k}</div>
-                <div className="mt-2 font-display text-lg text-ink">{f.v}</div>
+              { k: 'People', v: 'Community first — friendships built across the felt' },
+              { k: 'Play', v: 'Structured competition, coaching and open play' },
+              { k: 'Passion', v: 'Love of the game, shared with Accra and beyond' },
+            ].map((f) => (
+              <div key={f.k} className="card-surface p-6">
+                <div className="font-display text-2xl text-cyan-neon">{f.k}</div>
+                <div className="mt-2 text-xs leading-relaxed text-muted">{f.v}</div>
               </div>
             ))}
           </div>
         </Reveal>
       </div>
+
+      <Reveal className="mt-20">
+        <div className="eyebrow">Key Milestones</div>
+        <div className="mt-6 grid gap-4 md:grid-cols-4">
+          {MILESTONES.map((m, i) => (
+            <div key={i} className="card-surface border-t-2 border-cyan-neon/40 p-6">
+              <div className="font-display text-3xl text-gold">{m.year}</div>
+              <p className="mt-2 text-sm leading-relaxed text-muted">{m.text}</p>
+            </div>
+          ))}
+        </div>
+      </Reveal>
+
+      <Reveal className="mt-20">
+        <div className="eyebrow">Leadership & Governance</div>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {GOVERNANCE.map((g) => (
+            <div key={g.role} className="card-surface p-6">
+              <div className="font-semibold text-ink">{g.role}</div>
+              <p className="mt-1 text-xs text-muted">Executive Committee — details published after approval.</p>
+            </div>
+          ))}
+        </div>
+        <p className="mt-6 text-sm text-muted">
+          <a href="#" className="font-semibold text-cyan-neon underline-offset-4 hover:underline">
+            Download the Official Club Profile (PDF) →
+          </a>
+        </p>
+      </Reveal>
 
       <Reveal className="mt-20">
         <div className="card-surface flex flex-col items-start justify-between gap-6 p-10 sm:flex-row sm:items-center">

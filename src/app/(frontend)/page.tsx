@@ -73,10 +73,31 @@ export default async function HomePage() {
 
       <Marquee text={settings?.marqueeText || 'SHOT MASTERS CUE CLUB • CHAMPIONSHIP TABLES • OPEN DAILY • ACCRA'} />
 
-      {/* ── STATS ────────────────────────────────────── */}
+      {/* ── 03 OUR CLUB — intro ─────────────────────── */}
+      <section className="mx-auto max-w-4xl px-5 py-20 text-center sm:px-8">
+        <Reveal>
+          <div className="eyebrow">Our Club</div>
+          <p className="mt-6 text-lg leading-relaxed text-muted">
+            Shot Masters Cue Club is a professional cue-sports club and social community in
+            Accra, Ghana. Born from Two Shots Pool Club, we&apos;ve grown into structured
+            International 8-Ball league play, anniversary tournaments and open nights that
+            bring together players, families and fans. Beyond the tables we invest in
+            community — charitable outreach, sports tourism and a welcoming home for anyone
+            who loves the game.
+          </p>
+          <TransitionLink href="/about" className="mt-8 inline-block btn-ghost">
+            About SMCC →
+          </TransitionLink>
+        </Reveal>
+      </section>
+
+      {/* ── 04 SPORTING ACHIEVEMENTS ─────────────────── */}
       <section className="relative bg-[#e8f2ef]">
         <ParallaxBg src={IMG.balls} scrim="rgba(232,242,239,0.88)" />
         <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8">
+        <Reveal>
+          <div className="eyebrow mb-8 text-center">Sporting Achievements</div>
+        </Reveal>
         <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
           {stats.map((s, i) => (
             <Reveal key={i} delay={i * 0.08}>
@@ -147,6 +168,92 @@ export default async function HomePage() {
         </section>
       )}
 
+      {/* ── 05 UPCOMING EVENTS ─────────────────────── */}
+      {sections.showTournaments !== false && tournaments.docs.length > 0 && (
+        <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
+          <SectionHeading
+            eyebrow="Competitions & Events"
+            title="UPCOMING EVENTS"
+            sub="Knockouts, leagues and open nights — bring your A game."
+          />
+          <div className="space-y-4">
+            {tournaments.docs.map((t, i) => (
+              <Reveal key={t.id} delay={i * 0.08}>
+                <TransitionLink
+                  href={`/tournaments/${t.slug}`}
+                  className="card-surface group flex flex-col gap-4 p-6 transition-all duration-300 hover:border-cyan-neon/60 sm:flex-row sm:items-center sm:justify-between"
+                >
+                  <div className="flex items-center gap-6">
+                    <div className="font-display text-4xl text-surface-2 transition-colors group-hover:text-cyan-neon sm:text-5xl">
+                      {String(i + 1).padStart(2, '0')}
+                    </div>
+                    <div>
+                      <h3 className="font-display text-xl text-ink">{t.title}</h3>
+                      <p className="mt-1 text-xs uppercase tracking-widest text-muted">
+                        {t.format} · {new Date(t.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-6">
+                    {t.prizePool && <span className="text-sm font-bold text-gold">{t.prizePool}</span>}
+                    <span className={`rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-widest ${
+                      t.status === 'registration' ? 'bg-green-neon/15 text-green-neon' : 'bg-pink-neon/15 text-pink-neon'
+                    }`}>
+                      {t.status === 'registration' ? 'Open' : t.status}
+                    </span>
+                  </div>
+                </TransitionLink>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal className="mt-8">
+            <TransitionLink href="/tournaments" className="text-sm font-semibold text-cyan-neon hover:underline">
+              All events →
+            </TransitionLink>
+          </Reveal>
+        </section>
+      )}
+
+      {/* ── 06 PEOPLE · PLAY · PASSION ────────────────── */}
+      <section className="relative bg-[#0d3b2e] py-20">
+        <ParallaxBg src={IMG.crowd} scrim="rgba(13,59,46,0.82)" />
+        <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
+          <SectionHeading eyebrow="Our Values" title="PEOPLE · PLAY · PASSION" align="center" tone="dark" />
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              { k: 'People', d: 'Friendship, sportsmanship and a community where every player belongs.' },
+              { k: 'Play', d: 'Structured International 8-Ball — leagues, tournaments, coaching and open play.' },
+              { k: 'Passion', d: 'The love of the game that built us — shared with Accra and beyond.' },
+            ].map((v, i) => (
+              <Reveal key={v.k} delay={i * 0.1}>
+                <div className="card-surface h-full bg-surface/95 p-8 text-center">
+                  <div className="font-display text-4xl text-cyan-neon">{v.k}</div>
+                  <p className="mt-3 text-sm leading-relaxed text-muted">{v.d}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 07 SPORTS TOURISM & COMMUNITY teaser ─────── */}
+      <section className="relative overflow-hidden bg-[#0a0f1e] py-20">
+        <ParallaxBg src={IMG.hall} scrim="rgba(10,15,30,0.82)" />
+        <div className="relative mx-auto flex max-w-5xl flex-col items-center gap-8 px-5 text-center sm:px-8">
+          <Reveal>
+            <div className="eyebrow">Sports Tourism & Community</div>
+            <h2 className="mt-4 font-display text-4xl text-white sm:text-5xl">MORE THAN A GAME</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/70">
+              Cue sports meet Ghanaian culture — music, food, community and December in GH.
+              Our programmes invest in charity, sustainability and the next generation of players.
+            </p>
+            <TransitionLink href="/tourism" className="btn-ghost mt-8 inline-block text-white/80">
+              Explore Community →
+            </TransitionLink>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ── MEMBERSHIP TEASER ────────────────────────── */}
       {sections.showMembership !== false && plans.docs.length > 0 && (
         <section className="relative bg-[#0d3b2e] py-24">
@@ -196,52 +303,6 @@ export default async function HomePage() {
               </Magnetic>
             </Reveal>
           </div>
-        </section>
-      )}
-
-      {/* ── TOURNAMENTS ──────────────────────────────── */}
-      {sections.showTournaments !== false && tournaments.docs.length > 0 && (
-        <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
-          <SectionHeading
-            eyebrow="Competition"
-            title="UPCOMING TOURNAMENTS"
-            sub="Knockouts, leagues and open nights — bring your A game."
-          />
-          <div className="space-y-4">
-            {tournaments.docs.map((t, i) => (
-              <Reveal key={t.id} delay={i * 0.08}>
-                <TransitionLink
-                  href={`/tournaments/${t.slug}`}
-                  className="card-surface group flex flex-col gap-4 p-6 transition-all duration-300 hover:border-cyan-neon/60 sm:flex-row sm:items-center sm:justify-between"
-                >
-                  <div className="flex items-center gap-6">
-                    <div className="font-display text-4xl text-surface-2 transition-colors group-hover:text-cyan-neon sm:text-5xl">
-                      {String(i + 1).padStart(2, '0')}
-                    </div>
-                    <div>
-                      <h3 className="font-display text-xl text-ink">{t.title}</h3>
-                      <p className="mt-1 text-xs uppercase tracking-widest text-muted">
-                        {t.format} · {new Date(t.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-6">
-                    {t.prizePool && <span className="text-sm font-bold text-gold">{t.prizePool}</span>}
-                    <span className={`rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-widest ${
-                      t.status === 'registration' ? 'bg-green-neon/15 text-green-neon' : 'bg-pink-neon/15 text-pink-neon'
-                    }`}>
-                      {t.status === 'registration' ? 'Open' : t.status}
-                    </span>
-                  </div>
-                </TransitionLink>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal className="mt-8">
-            <TransitionLink href="/tournaments" className="text-sm font-semibold text-cyan-neon hover:underline">
-              All tournaments →
-            </TransitionLink>
-          </Reveal>
         </section>
       )}
 
@@ -321,10 +382,13 @@ export default async function HomePage() {
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
               <Magnetic>
-                <TransitionLink href="/book" className="btn-primary">Book a Table</TransitionLink>
+                <TransitionLink href="/membership" className="btn-primary">Join SMCC</TransitionLink>
               </Magnetic>
               <Magnetic strength={0.25}>
-                <TransitionLink href="/contact" className="btn-ghost">Find Us</TransitionLink>
+                <TransitionLink href="/partnerships" className="btn-ghost">Partner With Us</TransitionLink>
+              </Magnetic>
+              <Magnetic strength={0.25}>
+                <TransitionLink href="/contact" className="btn-ghost">Contact</TransitionLink>
               </Magnetic>
             </div>
           </Reveal>

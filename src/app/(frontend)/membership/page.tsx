@@ -77,6 +77,35 @@ export default async function MembershipPage({
       <Reveal className="mt-16 text-center text-sm text-muted">
         Pay securely with MTN MoMo, Vodafone Cash or card via Paystack.
       </Reveal>
+
+      <div className="mx-auto mt-20 max-w-3xl">
+        <Reveal>
+          <div className="eyebrow">How to Apply</div>
+          <p className="mt-3 text-sm leading-relaxed text-muted">
+            Pick a tier above, or send a membership enquiry and we&apos;ll walk you through
+            joining. Every application is reviewed by the Club — we&apos;ll get back to you
+            within a few days.
+          </p>
+        </Reveal>
+        <Reveal className="mt-10">
+          <div className="eyebrow">Frequently Asked</div>
+          <div className="mt-5 space-y-3">
+            {[
+              { q: 'Who can join SMCC?', a: 'Anyone with a love for cue sports — beginners to competitors. All applications go through the Club\u2019s standard review.' },
+              { q: 'What are member responsibilities?', a: 'Respect the tables, the rules and each other — our code of conduct keeps the club welcoming for everyone.' },
+              { q: 'What rules does the club play?', a: 'Recognised International 8-Ball rules. New members get a walkthrough on their first visit.' },
+              { q: 'Can I pause or cancel?', a: 'Yes — memberships are month-to-month after your first term. Talk to the committee to pause or cancel.' },
+            ].map((f) => (
+              <details key={f.q} className="card-surface group px-6 py-4">
+                <summary className="cursor-pointer list-none font-semibold text-ink transition-colors group-open:text-cyan-neon">
+                  {f.q}
+                </summary>
+                <p className="mt-3 text-sm leading-relaxed text-muted">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </Reveal>
+      </div>
     </div>
   )
 }

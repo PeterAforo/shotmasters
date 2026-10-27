@@ -15,6 +15,7 @@ export function ContactForm() {
       body: JSON.stringify({
         name: form.get('name'),
         email: form.get('email'),
+        subject: form.get('subject'),
         message: form.get('message'),
       }),
     })
@@ -41,9 +42,23 @@ export function ContactForm() {
         <input name="email" type="email" required className="input-field" placeholder="you@email.com" />
       </div>
       <div>
+        <label className="eyebrow mb-2 block">Subject</label>
+        <select name="subject" required className="input-field" defaultValue="">
+          <option value="" disabled>Choose a topic…</option>
+          <option value="general">General enquiry</option>
+          <option value="membership">Membership</option>
+          <option value="events">Events & registration</option>
+          <option value="sponsorship">Sponsorship & partnerships</option>
+        </select>
+      </div>
+      <div>
         <label className="eyebrow mb-2 block">Message</label>
         <textarea name="message" required rows={5} className="input-field" placeholder="What's on your mind?" />
       </div>
+      <label className="flex items-start gap-3 text-xs text-muted">
+        <input type="checkbox" required className="mt-0.5 accent-[#2563eb]" />
+        I consent to SMCC storing my details to respond to this enquiry.
+      </label>
       {status === 'error' && <p className="text-sm text-pink-neon">Something went wrong — try WhatsApp instead.</p>}
       <button type="submit" disabled={status === 'sending'} className="btn-primary disabled:opacity-50">
         {status === 'sending' ? 'Sending…' : 'Send Message'}
