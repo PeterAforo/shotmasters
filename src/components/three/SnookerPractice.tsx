@@ -442,7 +442,7 @@ export function SnookerPractice() {
       {/* charging power bar */}
       {phase === 'charging' && (
         <div className="pointer-events-none absolute left-1/2 top-1/2 h-2 w-48 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full bg-white/15">
-          <div className="h-full bg-gradient-to-r from-green-neon via-gold to-pink-neon" style={{ width: `${sim.current.power * 100}%` }} />
+          <div className="h-full bg-linear-to-r from-green-neon via-gold to-pink-neon" style={{ width: `${sim.current.power * 100}%` }} />
         </div>
       )}
 

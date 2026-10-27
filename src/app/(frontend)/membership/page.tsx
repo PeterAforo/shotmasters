@@ -45,7 +45,7 @@ export default async function MembershipPage({
               }`}
             >
               {p.featured && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-gradient-to-r from-cyan-neon to-green-neon px-4 py-1 text-[10px] font-bold uppercase tracking-widest text-paper">
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-linear-to-r from-cyan-neon to-green-neon px-4 py-1 text-[10px] font-bold uppercase tracking-widest text-paper">
                   Most Popular
                 </span>
               )}

@@ -13,7 +13,7 @@ const linkClass = (active: boolean) =>
   }`
 
 const underline = (active: boolean) =>
-  `absolute -bottom-1.5 left-0 h-px bg-gradient-to-r from-cyan-neon to-pink-neon transition-all duration-300 ${
+  `absolute -bottom-1.5 left-0 h-px bg-linear-to-r from-cyan-neon to-pink-neon transition-all duration-300 ${
     active ? 'w-full' : 'w-0 group-hover:w-full'
   }`
 
@@ -128,7 +128,7 @@ export function Header({ navItems, cta }: { navItems: MenuItem[]; cta: { label: 
 
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-          scrolled ? 'bg-[#0a0f1e]/90 backdrop-blur-xl' : 'bg-gradient-to-b from-[#0a0f1e]/60 to-transparent'
+          scrolled ? 'bg-[#0a0f1e]/90 backdrop-blur-xl' : 'bg-linear-to-b from-[#0a0f1e]/60 to-transparent'
         }`}
       >
         <div className="mx-auto flex h-24 max-w-7xl items-center justify-end gap-8 px-5 sm:px-8">

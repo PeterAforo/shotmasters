@@ -128,7 +128,7 @@ export function HeroSlider({ slides }: { slides?: Slide[] | null }) {
             >
               <span
                 className={`absolute inset-y-0 left-0 rounded-full transition-all duration-500 ${
-                  i === index ? 'w-full bg-gradient-to-r from-cyan-neon to-pink-neon' : i < index ? 'w-full bg-white/30' : 'w-0'
+                  i === index ? 'w-full bg-linear-to-r from-cyan-neon to-pink-neon' : i < index ? 'w-full bg-white/30' : 'w-0'
                 }`}
               />
             </button>
