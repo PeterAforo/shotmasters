@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a1420"/>
+      <stop offset="100%" stop-color="#05090f"/>
+    </linearGradient>
+    <linearGradient id="felt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#12704c"/>
+      <stop offset="100%" stop-color="#0a4a32"/>
+    </linearGradient>
+    <linearGradient id="lamp" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff7d6" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#fff7d6" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <!-- hanging lamps -->
+  <g>
+    <rect x="380" y="0" width="6" height="150" fill="#2a3444"/>
+    <rect x="1180" y="0" width="6" height="150" fill="#2a3444"/>
+    <ellipse cx="383" cy="170" rx="90" ry="30" fill="#12313f" stroke="#22d3ee" stroke-opacity="0.5"/>
+    <ellipse cx="1183" cy="170" rx="90" ry="30" fill="#12313f" stroke="#f472b6" stroke-opacity="0.5"/>
+    <polygon points="300,185 470,185 800,700 -30,700" fill="url(#lamp)" opacity="0.7"/>
+    <polygon points="1100,185 1270,185 1650,700 750,700" fill="url(#lamp)" opacity="0.55"/>
+  </g>
+  <!-- snooker table perspective -->
+  <g>
+    <polygon points="150,900 1450,900 1150,600 450,600" fill="#3d2417"/>
+    <polygon points="210,860 1390,860 1120,630 480,630" fill="url(#felt)"/>
+    <ellipse cx="500" cy="680" rx="22" ry="9" fill="#05080c"/>
+    <ellipse cx="800" cy="655" rx="20" ry="8" fill="#05080c"/>
+    <ellipse cx="1100" cy="680" rx="22" ry="9" fill="#05080c"/>
+    <g fill="#c1282d">
+      <circle cx="880" cy="720" r="12"/><circle cx="910" cy="735" r="12"/><circle cx="940" cy="750" r="12"/>
+      <circle cx="860" cy="745" r="12"/><circle cx="895" cy="760" r="12"/><circle cx="930" cy="775" r="12"/>
+    </g>
+    <circle cx="600" cy="760" r="13" fill="#f8f4e8"/>
+    <circle cx="800" cy="700" r="11" fill="#2456c8"/>
+    <circle cx="1050" cy="730" r="11" fill="#10131f"/>
+    <line x1="480" y1="790" x2="610" y2="740" stroke="#a06a3a" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <rect width="1600" height="900" fill="#0a0f1e" opacity="0.25"/>
+</svg>
