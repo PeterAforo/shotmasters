@@ -28,14 +28,14 @@ const FALLBACK_NAV = [
   { label: 'Home', href: '/' },
   { label: 'About SMCC', href: '/about' },
   { label: 'Membership', href: '/membership' },
-  { label: 'Competitions & Events', children: [
+  { label: 'The Club', children: [
     { label: 'Tournaments', href: '/tournaments' },
     { label: 'Leaderboard', href: '/leaderboard' },
     { label: 'News', href: '/news' },
+    { label: 'Partnerships', href: '/partnerships' },
   ]},
   { label: 'Gallery & Media', href: '/gallery' },
   { label: 'Sports Tourism & Community', href: '/tourism' },
-  { label: 'Partnerships', href: '/partnerships' },
   { label: 'Contact', href: '/contact' },
 ]
 
