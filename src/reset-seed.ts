@@ -9,7 +9,9 @@ const run = async () => {
   const payload = await getPayload({ config })
   for (const slug of CONTENT) {
     const { docs } = await payload.find({ collection: slug as never, limit: 500, overrideAccess: true })
-    for (const d of docs) await payload.delete({ collection: slug as never, id: d.id, overrideAccess: true })
+    for (const d of docs as { id: number | string }[]) {
+      await payload.delete({ collection: slug as never, id: d.id, overrideAccess: true })
+    }
     console.log(`cleared ${slug}: ${docs.length}`)
   }
   process.exit(0)
