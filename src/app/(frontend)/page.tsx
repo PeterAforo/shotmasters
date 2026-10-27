@@ -100,12 +100,14 @@ export default async function HomePage() {
             { k: 'Passion', d: 'The love of the game that built us — shared with Accra and beyond.', icon: 'M12 21s-7.5-4.6-9.8-9.2C.6 8.4 2.5 5 6 5c2.2 0 3.6 1.2 4.4 2.4h3.2C14.4 6.2 15.8 5 18 5c3.5 0 5.4 3.4 3.8 6.8C19.5 16.4 12 21 12 21Z', accent: 'bg-cyan-neon' },
           ].map((f, i) => (
             <Reveal key={f.k} delay={i * 0.1}>
-              <div className="card-surface h-full p-7">
-                <div className={`flex h-14 w-14 items-center justify-center rounded-full ${f.accent}`}>
-                  <svg viewBox="0 0 24 24" className="h-6 w-6 fill-white"><path d={f.icon} /></svg>
+              <div className="card-surface flex h-full items-start gap-4 p-5">
+                <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${f.accent}`}>
+                  <svg viewBox="0 0 24 24" className="h-5 w-5 fill-white"><path d={f.icon} /></svg>
                 </div>
-                <h3 className="mt-5 font-display text-xl text-ink">{f.k}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{f.d}</p>
+                <div>
+                  <h3 className="font-display text-lg text-ink">{f.k}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-muted">{f.d}</p>
+                </div>
               </div>
             </Reveal>
           ))}
