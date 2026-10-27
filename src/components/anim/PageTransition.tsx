@@ -43,9 +43,12 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     setPhase((p) => (p === 'cover' ? 'reveal' : p))
   }, [pathname])
 
+  // fixed nav + floating logo overlay page tops — inner pages need clearance
+  const isHome = pathname === '/'
+
   return (
     <TransitionContext.Provider value={{ navigate }}>
-      {children}
+      <div className={isHome ? undefined : 'pt-28'}>{children}</div>
       <AnimatePresence>
         {phase !== 'idle' && (
           <motion.div

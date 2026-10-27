@@ -90,7 +90,9 @@ export function Header({ navItems, cta }: { navItems: MenuItem[]; cta: { label: 
   const [openGroup, setOpenGroup] = useState<string | null>(null)
   const pathname = usePathname()
   const { scrollY } = useScroll()
-  // logo lives outside the nav row — shrinks smoothly 1 → 0.32 over first 300px
+  // logo lives outside the nav row — shrinks smoothly 1 → 0.32 over first 300px.
+  // On inner pages it's compact immediately (the big float is a home-hero feature).
+  const isHome = pathname === '/'
   const logoScale = useTransform(scrollY, [0, 300], [1, 0.32])
 
   useEffect(() => {
@@ -112,7 +114,7 @@ export function Header({ navItems, cta }: { navItems: MenuItem[]; cta: { label: 
           <motion.a
             href="/"
             className="group pointer-events-auto inline-block"
-            style={{ scale: logoScale, transformOrigin: 'top left' }}
+            style={{ scale: isHome ? logoScale : 0.32, transformOrigin: 'top left' }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
