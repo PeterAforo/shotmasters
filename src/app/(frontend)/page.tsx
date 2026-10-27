@@ -95,15 +95,20 @@ export default async function HomePage() {
         {/* feature cards */}
         <div className="mt-14 grid gap-6 md:grid-cols-3">
           {[
-            { k: 'People', d: 'Friendship, sportsmanship and a community where every player belongs.', icon: 'M16 19c-2.5 0-4.5-2-4.5-4.5S13.5 10 16 10s4.5 2 4.5 4.5S18.5 19 16 19Zm-8 0c-2.5 0-4.5-2-4.5-4.5S5.5 10 8 10s4.5 2 4.5 4.5S10.5 19 8 19Zm4-13a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z', accent: 'bg-cyan-neon' },
-            { k: 'Play', d: 'Structured International 8-Ball — leagues, tournaments, coaching and open play.', icon: 'M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20Zm0-14a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z', accent: 'bg-ink' },
-            { k: 'Passion', d: 'The love of the game that built us — shared with Accra and beyond.', icon: 'M12 21s-7.5-4.6-9.8-9.2C.6 8.4 2.5 5 6 5c2.2 0 3.6 1.2 4.4 2.4h3.2C14.4 6.2 15.8 5 18 5c3.5 0 5.4 3.4 3.8 6.8C19.5 16.4 12 21 12 21Z', accent: 'bg-cyan-neon' },
+            { k: 'People', d: 'Friendship, sportsmanship and a community where every player belongs.', ball: 'radial-gradient(circle at 32% 28%, #ff8a8f, #c1282d 55%, #6e1216)' },
+            { k: 'Play', d: 'Structured International 8-Ball — leagues, tournaments, coaching and open play.', ball: 'radial-gradient(circle at 32% 28%, #7da4ff, #2456c8 55%, #12275e)' },
+            { k: 'Passion', d: 'The love of the game that built us — shared with Accra and beyond.', ball: 'radial-gradient(circle at 32% 28%, #ffb3d4, #e26a9a 55%, #8a2d55)' },
           ].map((f, i) => (
             <Reveal key={f.k} delay={i * 0.1}>
               <div className="card-surface flex h-full items-start gap-4 p-5">
-                <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${f.accent}`}>
-                  <svg viewBox="0 0 24 24" className="h-5 w-5 fill-white"><path d={f.icon} /></svg>
-                </div>
+                <span
+                  aria-hidden
+                  className="mt-0.5 block h-11 w-11 shrink-0 rounded-full"
+                  style={{
+                    background: f.ball,
+                    boxShadow: 'inset -5px -7px 9px rgba(0,0,0,0.35), inset 3px 4px 7px rgba(255,255,255,0.35), 0 5px 12px rgba(10,15,30,0.3)',
+                  }}
+                />
                 <div>
                   <h3 className="font-display text-lg text-ink">{f.k}</h3>
                   <p className="mt-1 text-sm leading-relaxed text-muted">{f.d}</p>
