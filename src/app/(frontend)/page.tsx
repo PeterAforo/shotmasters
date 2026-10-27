@@ -128,7 +128,8 @@ export default async function HomePage() {
 
       {/* ── TABLES ───────────────────────────────────── */}
       {sections.showTables !== false && (
-        <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
+        <section className="bg-white py-16">
+          <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <SectionHeading
             eyebrow="The Arena"
             title="CHAMPIONSHIP TABLES"
@@ -177,6 +178,7 @@ export default async function HomePage() {
                 </Reveal>
               )
             })}
+          </div>
           </div>
         </section>
       )}
