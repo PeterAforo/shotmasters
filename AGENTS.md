@@ -46,3 +46,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ## Git workflow
 - ALWAYS commit every website change to git and push to origin/main — no uncommitted work left behind.
 
+
+## Credits rule
+- Every product (old and new) must show 'Developed by McAforo' in the footer copyright area, bottom-right, linking to https://www.mcaforo.com (target=_blank).
+

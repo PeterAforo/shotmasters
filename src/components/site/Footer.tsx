@@ -99,6 +99,12 @@ export function Footer({ settings, navItems }: { settings: Settings | null; navI
           <span>© {new Date().getFullYear()} {name}. All rights reserved.</span>
           <span className="flex gap-5">
             <a href="/privacy" className="transition-colors hover:text-white">Privacy Policy</a>
+            <span>
+              Developed by{' '}
+              <a href="https://www.mcaforo.com" target="_blank" rel="noreferrer" className="font-semibold text-cyan-neon transition-colors hover:underline">
+                McAforo
+              </a>
+            </span>
             <span>Accra · Ghana 🇬🇭</span>
           </span>
         </div>
