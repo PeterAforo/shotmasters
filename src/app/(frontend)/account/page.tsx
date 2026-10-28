@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation'
 import { getPayloadClient } from '@/lib/payload'
 import { formatDate, formatGHS } from '@/lib/utils'
 import { SectionHeading } from '@/components/site/SectionHeading'
+import { PageHeader } from '@/components/site/PageHeader'
 import { Reveal } from '@/components/anim/Reveal'
 import { TransitionLink } from '@/components/anim/PageTransition'
 import { LogoutButton } from './LogoutButton'
@@ -56,7 +57,9 @@ export default async function AccountPage() {
   const plan = user.membershipPlan as { name?: string } | null | undefined
 
   return (
-    <div className="mx-auto max-w-5xl px-5 pb-24 pt-36 sm:px-8">
+    <>
+    <PageHeader title="My Account" crumbs={[{ label: 'My Account' }]} image="/media/img-02.jpg" />
+    <div className="mx-auto max-w-5xl px-5 pb-24 pt-16 sm:px-8">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <SectionHeading eyebrow="Member Area" title={`HEY, ${(user.nickname || user.name || 'PLAYER').toUpperCase()}`} />
         <LogoutButton />
@@ -138,5 +141,6 @@ export default async function AccountPage() {
         )}
       </Reveal>
     </div>
+    </>
   )
 }

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { getPayloadClient } from '@/lib/payload'
-import { SectionHeading } from '@/components/site/SectionHeading'
+import { PageHeader } from '@/components/site/PageHeader'
 import { Reveal } from '@/components/anim/Reveal'
 import { mediaUrl } from '@/lib/utils'
 
@@ -20,13 +20,14 @@ export default async function LeaderboardPage() {
   const rest = docs.slice(3)
 
   return (
-    <div className="mx-auto max-w-6xl px-5 pb-24 pt-36 sm:px-8">
-      <SectionHeading
-        eyebrow="Rankings"
-        title="CLUB LEADERBOARD"
-        sub="Updated weekly by club staff. Earn points in tournaments and ladder matches."
-        align="center"
-      />
+    <>
+    <PageHeader
+      title="Club Leaderboard"
+      crumbs={[{ label: 'The Club' }, { label: 'Leaderboard' }]}
+      image="/media/img-06.jpg"
+      sub="Updated weekly by club staff. Earn points in tournaments and ladder matches."
+    />
+    <div className="mx-auto max-w-6xl px-5 pb-24 pt-16 sm:px-8">
 
       {docs.length === 0 ? (
         <Reveal><p className="text-center text-muted">Rankings publish after our next tournament.</p></Reveal>
@@ -79,5 +80,6 @@ export default async function LeaderboardPage() {
         </>
       )}
     </div>
+    </>
   )
 }

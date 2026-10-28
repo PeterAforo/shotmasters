@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { getPayloadClient } from '@/lib/payload'
 import { Reveal } from '@/components/anim/Reveal'
 import { RichText } from '@/components/RichText'
-import { TransitionLink } from '@/components/anim/PageTransition'
+import { PageHeader } from '@/components/site/PageHeader'
 import { formatDate, mediaUrl } from '@/lib/utils'
 
 export const revalidate = 60
@@ -33,13 +33,15 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const img = mediaUrl(post.coverImage, 'hero')
 
   return (
-    <article className="mx-auto max-w-3xl px-5 pb-24 pt-36 sm:px-8">
+    <>
+    <PageHeader
+      title={post.title}
+      crumbs={[{ label: 'The Club' }, { label: 'News', href: '/news' }, { label: post.title }]}
+      image={img || '/media/img-06.jpg'}
+    />
+    <article className="mx-auto max-w-3xl px-5 pb-24 pt-16 sm:px-8">
       <Reveal>
-        <TransitionLink href="/news" className="text-xs font-semibold uppercase tracking-widest text-muted hover:text-cyan-neon">
-          ? All news
-        </TransitionLink>
-        <h1 className="mt-6 font-display text-4xl leading-[0.95] text-ink sm:text-6xl">{post.title}</h1>
-        <div className="mt-4 flex items-center gap-4 text-xs uppercase tracking-widest text-muted">
+        <div className="flex items-center gap-4 text-xs uppercase tracking-widest text-muted">
           <span className="text-pink-neon">{post.category}</span>
           <span>{formatDate(post.publishedAt)}</span>
         </div>
@@ -56,5 +58,6 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         <RichText data={post.content} className="text-lg" />
       </Reveal>
     </article>
+    </>
   )
 }

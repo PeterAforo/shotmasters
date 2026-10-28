@@ -3,6 +3,7 @@ import { getSiteSettings } from '@/lib/payload'
 import { Reveal } from '@/components/anim/Reveal'
 import { SectionHeading } from '@/components/site/SectionHeading'
 import { TransitionLink } from '@/components/anim/PageTransition'
+import { PageHeader } from '@/components/site/PageHeader'
 
 export const metadata: Metadata = { title: 'About SMCC' }
 
@@ -24,7 +25,9 @@ export default async function AboutPage() {
   const settings = await getSiteSettings().catch(() => null)
 
   return (
-    <div className="mx-auto max-w-7xl px-5 pb-24 sm:px-8">
+    <>
+    <PageHeader title="About Us" crumbs={[{ label: 'About' }]} image="/media/img-01.jpg" />
+    <div className="mx-auto max-w-7xl px-5 pb-24 pt-16 sm:px-8">
       <SectionHeading
         eyebrow="About SMCC"
         title="PEOPLE · PLAY · PASSION"
@@ -107,5 +110,6 @@ export default async function AboutPage() {
         </div>
       </Reveal>
     </div>
+    </>
   )
 }

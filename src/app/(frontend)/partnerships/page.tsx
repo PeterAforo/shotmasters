@@ -4,6 +4,7 @@ import { SectionHeading } from '@/components/site/SectionHeading'
 import { Reveal } from '@/components/anim/Reveal'
 import { TransitionLink } from '@/components/anim/PageTransition'
 import { ParallaxBg } from '@/components/anim/ParallaxBg'
+import { PageHeader } from '@/components/site/PageHeader'
 import { IMG } from '@/lib/imagery'
 
 export const metadata: Metadata = { title: 'Partnerships' }
@@ -22,7 +23,9 @@ export default async function PartnershipsPage() {
   const items = ops?.length ? ops : FALLBACK_OPS
 
   return (
-    <div className="mx-auto max-w-7xl px-5 pb-24 sm:px-8">
+    <>
+    <PageHeader title="Partnerships" crumbs={[{ label: 'The Club' }, { label: 'Partnerships' }]} image="/media/img-01.jpg" />
+    <div className="mx-auto max-w-7xl px-5 pb-24 pt-16 sm:px-8">
       <SectionHeading
         eyebrow="Partnerships"
         title="PARTNER WITH SMCC"
@@ -46,5 +49,6 @@ export default async function PartnershipsPage() {
         <TransitionLink href="/membership" className="btn-ghost">Join the Club</TransitionLink>
       </Reveal>
     </div>
+    </>
   )
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getSiteSettings } from '@/lib/payload'
 import { SectionHeading } from '@/components/site/SectionHeading'
+import { PageHeader } from '@/components/site/PageHeader'
 import { Reveal } from '@/components/anim/Reveal'
 import { ContactForm } from './ContactForm'
 import { waLink, waMessages } from '@/lib/whatsapp'
@@ -11,7 +12,9 @@ export default async function ContactPage() {
   const settings = await getSiteSettings().catch(() => null)
 
   return (
-    <div className="mx-auto max-w-7xl px-5 pb-24 pt-36 sm:px-8">
+    <>
+    <PageHeader title="Contact Us" crumbs={[{ label: 'Contact' }]} image="/media/img-04.jpg" />
+    <div className="mx-auto max-w-7xl px-5 pb-24 pt-16 sm:px-8">
       <SectionHeading eyebrow="Get in Touch" title="FIND US. CALL US. CHALLENGE US." />
 
       <div className="grid gap-12 lg:grid-cols-5">
@@ -51,5 +54,6 @@ export default async function ContactPage() {
         </Reveal>
       </div>
     </div>
+    </>
   )
 }

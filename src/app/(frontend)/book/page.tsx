@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { getPayloadClient } from '@/lib/payload'
-import { SectionHeading } from '@/components/site/SectionHeading'
+import { PageHeader } from '@/components/site/PageHeader'
 import { BookingFlow } from './BookingFlow'
 import { mediaUrl } from '@/lib/utils'
 
@@ -22,13 +22,16 @@ export default async function BookPage() {
   }))
 
   return (
-    <div className="mx-auto max-w-7xl px-5 pb-24 pt-36 sm:px-8">
-      <SectionHeading
-        eyebrow="Reserve"
-        title="BOOK A TABLE"
+    <>
+      <PageHeader
+        title="Book a Table"
+        crumbs={[{ label: 'Book a Table' }]}
+        image="/media/img-05.jpg"
         sub="Pick your table, lock your slot, pay a small deposit with MoMo or card — the rest at the bar."
       />
-      <BookingFlow tables={tables} />
-    </div>
+      <div className="mx-auto max-w-7xl px-5 pb-24 pt-16 sm:px-8">
+        <BookingFlow tables={tables} />
+      </div>
+    </>
   )
 }

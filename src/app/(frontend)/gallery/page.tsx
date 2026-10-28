@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getPayloadClient } from '@/lib/payload'
 import { SectionHeading } from '@/components/site/SectionHeading'
+import { PageHeader } from '@/components/site/PageHeader'
 import { Reveal } from '@/components/anim/Reveal'
 import { mediaUrl } from '@/lib/utils'
 import { GALLERY_FALLBACKS } from '@/lib/imagery'
@@ -15,7 +16,9 @@ export default async function GalleryPage() {
     .catch(() => ({ docs: [] }))
 
   return (
-    <div className="mx-auto max-w-7xl px-5 pb-24 pt-36 sm:px-8">
+    <>
+    <PageHeader title="Gallery" crumbs={[{ label: 'Media' }, { label: 'Gallery' }]} image="/media/img-05.jpg" />
+    <div className="mx-auto max-w-7xl px-5 pb-24 pt-16 sm:px-8">
       <SectionHeading
         eyebrow="Gallery"
         title="INSIDE THE CLUB"
@@ -67,5 +70,6 @@ export default async function GalleryPage() {
         </div>
       </Reveal>
     </div>
+    </>
   )
 }

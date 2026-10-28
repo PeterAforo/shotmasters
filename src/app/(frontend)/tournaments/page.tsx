@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getPayloadClient } from '@/lib/payload'
 import { SectionHeading } from '@/components/site/SectionHeading'
+import { PageHeader } from '@/components/site/PageHeader'
 import { Reveal } from '@/components/anim/Reveal'
 import { TransitionLink } from '@/components/anim/PageTransition'
 import { formatDate, formatGHS, mediaUrl } from '@/lib/utils'
@@ -63,10 +64,12 @@ export default async function TournamentsPage() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-5 pb-24 pt-36 sm:px-8">
+    <>
+    <PageHeader title="Competitions & Events" crumbs={[{ label: 'The Club' }, { label: 'Tournaments' }]} image="/media/img-03.jpg" />
+    <div className="mx-auto max-w-7xl px-5 pb-24 pt-16 sm:px-8">
       <SectionHeading
         eyebrow="Competition"
-        title="TOURNAMENTS & EVENTS"
+        title="UPCOMING EVENTS"
         sub="Knockouts, leagues and open nights. Enter online — pay your entry with MoMo."
       />
 
@@ -105,5 +108,6 @@ export default async function TournamentsPage() {
         </div>
       </Reveal>
     </div>
+    </>
   )
 }

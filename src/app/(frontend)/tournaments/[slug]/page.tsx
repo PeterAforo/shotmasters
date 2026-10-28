@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getPayloadClient } from '@/lib/payload'
 import { SectionHeading } from '@/components/site/SectionHeading'
+import { PageHeader } from '@/components/site/PageHeader'
 import { Reveal } from '@/components/anim/Reveal'
 import { RichText } from '@/components/RichText'
 import { formatDate, formatGHS, mediaUrl } from '@/lib/utils'
@@ -46,7 +47,13 @@ export default async function TournamentPage({
   const img = mediaUrl(t.coverImage, 'hero')
 
   return (
-    <div className="mx-auto max-w-6xl px-5 pb-24 pt-32 sm:px-8">
+    <>
+    <PageHeader
+      title={t.title}
+      crumbs={[{ label: 'The Club' }, { label: 'Tournaments', href: '/tournaments' }, { label: t.title }]}
+      image={img || '/media/img-03.jpg'}
+    />
+    <div className="mx-auto max-w-6xl px-5 pb-24 pt-16 sm:px-8">
       {sp.entered && (
         <div className="mb-8 rounded-xl border border-green-neon/40 bg-green-neon/10 px-6 py-4 text-sm text-green-neon">
           ✅ Entry confirmed — see you at the table. Check your email for details.
@@ -62,7 +69,6 @@ export default async function TournamentPage({
               </span>
               <span className="text-xs uppercase tracking-widest text-muted">{formatDate(t.date)}</span>
             </div>
-            <h1 className="mt-4 font-display text-5xl leading-[0.95] text-ink sm:text-6xl">{t.title}</h1>
           </Reveal>
 
           {img && (
@@ -106,7 +112,7 @@ export default async function TournamentPage({
               rel="noreferrer"
               className="mt-4 block text-center text-xs font-semibold text-green-neon hover:underline"
             >
-              Ask about this event on WhatsApp ?
+              Ask about this event on WhatsApp →
             </a>
           </div>
         </Reveal>
@@ -145,5 +151,6 @@ export default async function TournamentPage({
         </div>
       )}
     </div>
+    </>
   )
 }

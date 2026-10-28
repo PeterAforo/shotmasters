@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getPayloadClient } from '@/lib/payload'
 import { SectionHeading } from '@/components/site/SectionHeading'
+import { PageHeader } from '@/components/site/PageHeader'
 import { Reveal } from '@/components/anim/Reveal'
 import { TransitionLink } from '@/components/anim/PageTransition'
 import { formatDate, mediaUrl } from '@/lib/utils'
@@ -15,7 +16,9 @@ export default async function NewsPage() {
     .catch(() => ({ docs: [] }))
 
   return (
-    <div className="mx-auto max-w-7xl px-5 pb-24 pt-36 sm:px-8">
+    <>
+    <PageHeader title="News & Announcements" crumbs={[{ label: 'The Club' }, { label: 'News' }]} image="/media/img-06.jpg" />
+    <div className="mx-auto max-w-7xl px-5 pb-24 pt-16 sm:px-8">
       <SectionHeading eyebrow="Club News" title="FROM THE FELT" sub="Match reports, announcements and club stories." />
 
       {docs.length === 0 ? (
@@ -50,5 +53,6 @@ export default async function NewsPage() {
         </div>
       )}
     </div>
+    </>
   )
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getPayloadClient } from '@/lib/payload'
 import { SectionHeading } from '@/components/site/SectionHeading'
+import { PageHeader } from '@/components/site/PageHeader'
 import { Reveal } from '@/components/anim/Reveal'
 import { formatGHS } from '@/lib/utils'
 import { JoinPlan } from './JoinPlan'
@@ -20,7 +21,9 @@ export default async function MembershipPage({
     .catch(() => ({ docs: [] }))
 
   return (
-    <div className="mx-auto max-w-7xl px-5 pb-24 pt-36 sm:px-8">
+    <>
+    <PageHeader title="Membership" crumbs={[{ label: 'Membership' }]} image="/media/img-02.jpg" />
+    <div className="mx-auto max-w-7xl px-5 pb-24 pt-16 sm:px-8">
       {sp.confirmed && (
         <div className="mb-10 rounded-xl border border-green-neon/40 bg-green-neon/10 px-6 py-4 text-sm text-green-neon">
           ⭐ Payment received — your membership is being activated. Check your email shortly.
@@ -107,5 +110,6 @@ export default async function MembershipPage({
         </Reveal>
       </div>
     </div>
+    </>
   )
 }

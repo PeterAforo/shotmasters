@@ -4,6 +4,7 @@ import { SectionHeading } from '@/components/site/SectionHeading'
 import { Reveal } from '@/components/anim/Reveal'
 import { TransitionLink } from '@/components/anim/PageTransition'
 import { ParallaxBg } from '@/components/anim/ParallaxBg'
+import { PageHeader } from '@/components/site/PageHeader'
 import { IMG } from '@/lib/imagery'
 import { mediaUrl } from '@/lib/utils'
 
@@ -24,7 +25,9 @@ export default async function TourismPage() {
   const items: { title?: string; body?: string; image?: unknown }[] = blocks?.length ? blocks : FALLBACK_BLOCKS
 
   return (
-    <div className="mx-auto max-w-7xl px-5 pb-24 sm:px-8">
+    <>
+    <PageHeader title="Sports Tourism & Community" crumbs={[{ label: 'Sports Tourism & Community' }]} image="/media/img-02.jpg" />
+    <div className="mx-auto max-w-7xl px-5 pb-24 pt-16 sm:px-8">
       <SectionHeading
         eyebrow="Sports Tourism & Community"
         title="SPORT, CULTURE, ACCRA."
@@ -50,5 +53,6 @@ export default async function TourismPage() {
         <TransitionLink href="/contact" className="btn-primary">Partner With Us</TransitionLink>
       </Reveal>
     </div>
+    </>
   )
 }

@@ -37,7 +37,7 @@ export function EnterTournament({ tournamentId, fee }: { tournamentId: number | 
   }
 
   if (state === 'done') {
-    return <p className="font-semibold text-green-neon">? You&apos;re entered!</p>
+    return <p className="font-semibold text-green-neon">✓ You&apos;re entered!</p>
   }
 
   return (

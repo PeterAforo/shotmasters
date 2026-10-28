@@ -5,6 +5,7 @@ import { waLink, waMessages } from '@/lib/whatsapp'
 import { formatDate, formatGHS } from '@/lib/utils'
 import { Reveal } from '@/components/anim/Reveal'
 import { TransitionLink } from '@/components/anim/PageTransition'
+import { PageHeader } from '@/components/site/PageHeader'
 
 export const metadata: Metadata = { title: 'Booking Confirmed' }
 
@@ -47,7 +48,13 @@ export default async function BookingConfirmedPage({
     booking?.table && typeof booking.table === 'object' ? booking.table.name : undefined
 
   return (
-    <div className="mx-auto flex min-h-[70vh] max-w-2xl flex-col items-center justify-center px-5 pb-24 pt-36 text-center sm:px-8">
+    <>
+    <PageHeader
+      title={status === 'confirmed' ? 'Booking Confirmed' : 'Booking Received'}
+      crumbs={[{ label: 'Book a Table', href: '/book' }, { label: 'Confirmation' }]}
+      image="/media/img-05.jpg"
+    />
+    <div className="mx-auto flex max-w-2xl flex-col items-center px-5 pb-24 pt-16 text-center sm:px-8">
       <Reveal>
         <div className={`font-display text-6xl sm:text-7xl ${status === 'confirmed' ? 'text-green-neon' : 'text-gold'}`}>
           {status === 'confirmed' ? 'LOCKED IN.' : 'ALMOST THERE.'}
@@ -82,5 +89,6 @@ export default async function BookingConfirmedPage({
         </div>
       </Reveal>
     </div>
+    </>
   )
 }
