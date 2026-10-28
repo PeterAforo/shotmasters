@@ -6,6 +6,7 @@ import { getNavigation, getSiteSettings } from '@/lib/payload'
 import { normalizeNav, flattenNav } from '@/lib/navigation'
 import { Header } from '@/components/site/Header'
 import { Footer } from '@/components/site/Footer'
+import { NewsletterSection } from '@/components/site/NewsletterSection'
 import { WhatsAppButton } from '@/components/site/WhatsAppButton'
 import { Preloader } from '@/components/anim/Preloader'
 import { SmoothScroll } from '@/components/anim/SmoothScroll'
@@ -63,6 +64,7 @@ export default async function FrontendLayout({
               cta={{ label: nav?.ctaLabel || 'Join', href: nav?.ctaHref || '/membership' }}
             />
             <main>{children}</main>
+            <NewsletterSection />
             <Footer settings={settings} navItems={footerNav} />
             <WhatsAppButton />
           </PageTransition>

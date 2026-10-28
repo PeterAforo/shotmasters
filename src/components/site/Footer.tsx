@@ -1,5 +1,4 @@
 import { waLink, waMessages } from '@/lib/whatsapp'
-import { NewsletterForm } from '@/components/site/NewsletterForm'
 
 type Settings = {
   clubName?: string | null
@@ -21,10 +20,10 @@ export function Footer({ settings, navItems }: { settings: Settings | null; navI
         style={{ background: 'radial-gradient(70% 60% at 50% 100%, rgba(14,92,63,0.18), transparent 70%)' }}
       />
       <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8">
-        <div className="grid gap-12 md:grid-cols-4">
+        <div className="grid gap-12 md:grid-cols-5">
           <div className="md:col-span-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/logo.png" alt={name} className="h-16 w-auto" />
+            <img src="/brand/logo.png" alt={name} className="h-32 w-auto" />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/60">
               {settings?.address || 'Accra, Ghana'} — championship tables, cold drinks,
               and the finest cue sports community in the city.
@@ -46,18 +45,21 @@ export function Footer({ settings, navItems }: { settings: Settings | null; navI
             )}
           </div>
 
-          <div>
-            <h3 className="eyebrow mb-5">Explore</h3>
-            <ul className="space-y-3">
-              {navItems.map((n) => (
-                <li key={n.href}>
-                  <a href={n.href} className="text-sm text-white/60 transition-colors hover:text-white">
-                    {n.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {[navItems.slice(0, Math.ceil(navItems.length / 2)), navItems.slice(Math.ceil(navItems.length / 2))].map((col, ci) => (
+            <div key={ci}>
+              {ci === 0 && <h3 className="eyebrow mb-5">Explore</h3>}
+              {ci === 1 && <div className="eyebrow mb-5 opacity-0">.</div>}
+              <ul className="space-y-3">
+                {col.map((n) => (
+                  <li key={n.href}>
+                    <a href={n.href} className="text-sm text-white/60 transition-colors hover:text-white">
+                      {n.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
 
           <div>
             <h3 className="eyebrow mb-5">Hours & Contact</h3>
@@ -82,11 +84,6 @@ export function Footer({ settings, navItems }: { settings: Settings | null; navI
               </a>
             </div>
           </div>
-        </div>
-
-        <div className="mt-14 flex flex-col gap-3">
-          <h3 className="eyebrow">Stay in the loop</h3>
-          <NewsletterForm />
         </div>
 
         <div className="mt-16 overflow-hidden">
