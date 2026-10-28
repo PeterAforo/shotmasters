@@ -8,4 +8,4 @@ export const IMG = {
 } as const
 
 export const TABLE_FALLBACKS = [IMG.room, IMG.hall, IMG.balls]
-export const GALLERY_FALLBACKS = [IMG.balls, IMG.hall, IMG.room, IMG.crowd]
+export const GALLERY_FALLBACKS = [1, 2, 3, 4, 5, 6].map((n) => `/media/img-0${n}.jpg`)

@@ -4,17 +4,56 @@ import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 
-export function VideoLightbox({ poster, src, alt }: { poster: string; src: string; alt: string }) {
-  const [open, setOpen] = useState(false)
+/** Fullscreen video overlay, portalled to <body> so transformed ancestors can't trap it. */
+export function VideoModal({ src, open, onClose }: { src: string | null; open: boolean; onClose: () => void }) {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => setMounted(true), [])
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [])
+  }, [onClose])
+
+  if (!mounted) return null
+
+  return createPortal(
+    <AnimatePresence>
+      {open && src && (
+        <motion.div
+          className="fixed inset-0 z-[90] flex items-center justify-center bg-night/85 p-5 backdrop-blur-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+        >
+          <motion.div
+            className="relative w-full max-w-4xl overflow-hidden rounded-2xl"
+            initial={{ scale: 0.9, y: 24 }}
+            animate={{ scale: 1, y: 0 }}
+            exit={{ scale: 0.95, y: 12 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <video src={src} controls autoPlay playsInline className="aspect-video w-full bg-black" />
+            <button
+              onClick={onClose}
+              className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-night/70 text-white transition hover:bg-night"
+              aria-label="Close video"
+            >
+              <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current"><path d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12z" /></svg>
+            </button>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>,
+    document.body,
+  )
+}
+
+export function VideoLightbox({ poster, src, alt }: { poster: string; src: string; alt: string }) {
+  const [open, setOpen] = useState(false)
 
   return (
     <>
@@ -31,39 +70,7 @@ export function VideoLightbox({ poster, src, alt }: { poster: string; src: strin
           </span>
         </span>
       </button>
-
-      {mounted && createPortal(
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            className="fixed inset-0 z-[90] flex items-center justify-center bg-night/85 p-5 backdrop-blur-sm"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setOpen(false)}
-          >
-            <motion.div
-              className="relative w-full max-w-4xl overflow-hidden rounded-2xl"
-              initial={{ scale: 0.9, y: 24 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.95, y: 12 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <video src={src} controls autoPlay playsInline className="aspect-video w-full bg-black" />
-              <button
-                onClick={() => setOpen(false)}
-                className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-night/70 text-white transition hover:bg-night"
-                aria-label="Close video"
-              >
-                <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current"><path d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12z" /></svg>
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>,
-      document.body
-      )}
+      <VideoModal src={src} open={open} onClose={() => setOpen(false)} />
     </>
   )
 }

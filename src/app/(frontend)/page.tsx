@@ -10,6 +10,14 @@ import { TiltCard } from '@/components/anim/TiltCard'
 import { SectionHeading } from '@/components/site/SectionHeading'
 import { TransitionLink } from '@/components/anim/PageTransition'
 import { VideoLightbox } from '@/components/site/VideoLightbox'
+import { GalleryCoverflow } from '@/components/site/GalleryCoverflow'
+
+const GALLERY_CATEGORY: Record<string, string> = {
+  club: 'The Club',
+  events: 'Events',
+  tournaments: 'Tournaments',
+  'trick-shots': 'Trick Shots',
+}
 
 export const revalidate = 60
 
@@ -286,36 +294,33 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* ── GALLERY STRIP ────────────────────────────── */}
-      {sections.showGallery !== false && gallery.docs.length > 0 && (
-        <section className="relative bg-[#fdf1f6] py-24">
-          <ParallaxBg src={IMG.bokeh} scrim="rgba(253,241,246,0.86)" />
-          <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
-            <SectionHeading eyebrow="Inside the Club" title="THE VIBE" />
-          </div>
-          <div className="relative flex gap-4 overflow-x-auto px-5 pb-4 sm:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {gallery.docs.map((g, i) => {
-              const img = mediaUrl(g.image, 'card') || GALLERY_FALLBACKS[i % GALLERY_FALLBACKS.length]
-              return (
-                <Reveal key={g.id} delay={i * 0.05} className="shrink-0">
-                  <div className="card-surface h-64 w-72 overflow-hidden">
-                    {img ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={img} alt={g.title} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" />
-                    ) : (
-                      <div className="flex h-full items-center justify-center bg-surface-2 font-display text-4xl text-line">
-                        {g.title?.slice(0, 2)}
-                      </div>
-                    )}
-                  </div>
-                </Reveal>
-              )
-            })}
-          </div>
-          <div className="relative px-5 pt-6 sm:px-8">
-            <TransitionLink href="/gallery" className="text-sm font-semibold text-cyan-neon hover:underline">
-              Full gallery →
-            </TransitionLink>
+      {/* ── GALLERY COVERFLOW ────────────────────────── */}
+      {sections.showGallery !== false && (
+        <section className="overflow-hidden bg-white py-24">
+          <div className="mx-auto max-w-7xl px-5 sm:px-8">
+            <Reveal className="mx-auto max-w-xl text-center">
+              <div className="eyebrow">Gallery</div>
+              <h2 className="mt-4 font-display text-4xl text-ink sm:text-5xl">THE VIBE</h2>
+              <p className="mt-4 text-sm leading-relaxed text-muted">
+                Inside the club through our lens — tournament nights, big breaks and the
+                community, in photos and videos.
+              </p>
+            </Reveal>
+            <Reveal className="mt-10">
+              <GalleryCoverflow
+                slides={[
+                  ...gallery.docs.map((g, i) => ({
+                    id: String(g.id),
+                    src: mediaUrl(g.image, 'card') || GALLERY_FALLBACKS[i % GALLERY_FALLBACKS.length],
+                    title: g.title,
+                    category: GALLERY_CATEGORY[g.category ?? 'club'] ?? 'The Club',
+                    video: g.type === 'video' && g.videoUrl?.endsWith('.mp4') ? g.videoUrl : undefined,
+                  })),
+                  { id: 'v1', src: IMG.crowd, title: 'Club Night Highlights', category: 'Videos', video: '/media/video-01.mp4' },
+                  { id: 'v2', src: IMG.hall, title: 'On the Table', category: 'Videos', video: '/media/video-02.mp4' },
+                ]}
+              />
+            </Reveal>
           </div>
         </section>
       )}
