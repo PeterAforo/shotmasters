@@ -79,7 +79,7 @@ body {
 .card-surface {
   background: var(--color-surface);
   border: 1px solid var(--color-line);
-  border-radius: 20px;
+  border-radius: 0;
   box-shadow: 0 12px 40px -18px rgba(16, 21, 40, 0.12);
 }
 
@@ -88,7 +88,7 @@ body {
   align-items: center;
   gap: 0.5rem;
   padding: 0.9rem 1.9rem;
-  border-radius: 999px;
+  border-radius: 0;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -108,7 +108,7 @@ body {
   align-items: center;
   gap: 0.5rem;
   padding: 0.9rem 1.9rem;
-  border-radius: 999px;
+  border-radius: 0;
   font-weight: 600;
   font-size: 0.8rem;
   letter-spacing: 0.04em;
@@ -136,7 +136,7 @@ body {
   width: 100%;
   background: var(--color-surface);
   border: 1px solid var(--color-line);
-  border-radius: 12px;
+  border-radius: 0;
   padding: 0.8rem 1rem;
   color: var(--color-ink);
   font-size: 0.95rem;
@@ -146,6 +146,23 @@ body {
   outline: none;
   border-color: var(--color-cyan-neon);
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Squared system — no rounded corners except true circles (balls, chips, play buttons) */
+.rounded,
+.rounded-sm,
+.rounded-md,
+.rounded-lg,
+.rounded-xl,
+.rounded-2xl,
+.rounded-3xl,
+.rounded-t-xl,
+.rounded-b-xl,
+.rounded-t-2xl,
+.rounded-b-2xl,
+.rounded-l-2xl,
+.rounded-r-2xl {
+  border-radius: 0 !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

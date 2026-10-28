@@ -35,7 +35,7 @@ export function NewsletterForm() {
         type="email"
         required
         placeholder="you@email.com"
-        className="h-11 flex-1 rounded-full border border-white/15 bg-white/5 px-5 text-sm text-white placeholder:text-white/40 focus:border-cyan-neon focus:outline-none"
+        className="h-11 flex-1 border border-white/15 bg-white/5 px-5 text-sm text-white placeholder:text-white/40 focus:border-cyan-neon focus:outline-none"
       />
       <button type="submit" disabled={status === 'sending'} className="btn-primary h-11 px-5 text-xs disabled:opacity-50">
         {status === 'sending' ? '…' : 'Join'}
