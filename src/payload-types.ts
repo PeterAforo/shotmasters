@@ -400,8 +400,16 @@ export interface Tournament {
   title: string;
   slug: string;
   status: 'upcoming' | 'registration' | 'ongoing' | 'completed';
+  /**
+   * e.g. Clash of the Titans
+   */
+  theme?: string | null;
   date: string;
   endDate?: string | null;
+  /**
+   * Display time, e.g. 9:00 AM – 9:00 PM
+   */
+  time?: string | null;
   format: 'knockout' | 'round-robin' | 'league';
   /**
    * GHS — 0 for free entry
@@ -413,7 +421,35 @@ export interface Tournament {
   prizePool?: string | null;
   maxPlayers?: number | null;
   venue?: string | null;
+  /**
+   * e.g. Free admission
+   */
+  spectators?: string | null;
   coverImage?: (number | null) | Media;
+  /**
+   * Image path/URL used when no cover image is uploaded, e.g. /media/events/poster.jpg
+   */
+  posterUrl?: string | null;
+  registration?: {
+    method?: ('online' | 'external') | null;
+    /**
+     * e.g. Register with MojoPay
+     */
+    label?: string | null;
+    /**
+     * External registration link
+     */
+    url?: string | null;
+    /**
+     * e.g. *789*411#
+     */
+    ussdCode?: string | null;
+    eventCode?: string | null;
+    /**
+     * Enquiries phone number
+     */
+    phone?: string | null;
+  };
   description?: {
     root: {
       type: string;
@@ -865,14 +901,28 @@ export interface TournamentsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   status?: T;
+  theme?: T;
   date?: T;
   endDate?: T;
+  time?: T;
   format?: T;
   entryFee?: T;
   prizePool?: T;
   maxPlayers?: T;
   venue?: T;
+  spectators?: T;
   coverImage?: T;
+  posterUrl?: T;
+  registration?:
+    | T
+    | {
+        method?: T;
+        label?: T;
+        url?: T;
+        ussdCode?: T;
+        eventCode?: T;
+        phone?: T;
+      };
   description?: T;
   results?:
     | T

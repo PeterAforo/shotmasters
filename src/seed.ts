@@ -3,6 +3,7 @@ import './loadenv'
 
 import { getPayload } from 'payload'
 import config from './payload.config'
+import { FESTIVAL } from './data/events'
 
 const paragraph = (text: string) => ({
   root: {
@@ -89,13 +90,7 @@ async function main() {
 
   // \u2500\u2500 tournaments
   const inDays = (n: number) => { const d = new Date(); d.setDate(d.getDate() + n); return d }
-  const tournaments = [
-    { title: 'December Cue Festival 2026 — Clash of the Titans', status: 'upcoming', date: new Date('2026-12-12T10:00:00Z'), format: 'knockout', entryFee: 200, prizePool: 'GH\u20b5 5,000 + trophy', maxPlayers: 64, venue: 'Borteyman Sports Complex, Accra', description: paragraph('Our flagship December event — Clash of the Titans at Borteyman Sports Complex on 12 December 2026. International 8-Ball, big prizes, bigger atmosphere. Details updated as confirmed.') },
-    { title: 'Accra Open Championship', status: 'registration', date: inDays(14), format: 'knockout', entryFee: 100, prizePool: 'GH\u20b5 2,000 + trophy', maxPlayers: 32, venue: 'Shot Masters Cue Club \u2014 Main Hall', description: paragraph('Our flagship ranking event. Best-of-5 frames, seeded draw, GH\u20b5 2,000 prize pool. Open to all members and invited guests. Registration closes 48 hours before the draw.') },
-    { title: 'Friday Night Shootout', status: 'registration', date: inDays(5), format: 'knockout', entryFee: 30, prizePool: 'GH\u20b5 500', maxPlayers: 16, venue: 'Shot Masters Cue Club', description: paragraph('Fast, loud, single-frame shootouts every Friday night. Perfect for sharpening your competitive nerve.') },
-    { title: 'Winter League \u2014 Week 8', status: 'ongoing', date: inDays(-2), format: 'league', entryFee: 0, prizePool: 'League points', maxPlayers: 24, venue: 'Shot Masters Cue Club', description: paragraph('Week 8 of the winter league. Top 4 at season end qualify for the championship playoff.') },
-    { title: 'June Ranking Final', status: 'completed', date: inDays(-30), format: 'knockout', entryFee: 80, prizePool: 'GH\u20b5 1,500', maxPlayers: 32, results: [{ placement: 1, playerName: 'K. Mensah' }, { placement: 2, playerName: 'A. Boateng' }, { placement: 3, playerName: 'Y. Asante' }], description: paragraph('The June ranking final \u2014 congrats to K. Mensah on the title.') },
-  ]
+  const tournaments = [FESTIVAL]
   const tCount = await payload.count({ collection: 'tournaments', overrideAccess: true })
   if (!tCount.totalDocs) {
     for (const t of tournaments) {
