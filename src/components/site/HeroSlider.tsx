@@ -111,8 +111,8 @@ export function HeroSlider({ slides }: { slides?: Slide[] | null }) {
             </Magnetic>
           )}
           <Magnetic strength={0.25}>
-            <TransitionLink href="/leaderboard" className="btn-ghost">
-              View Leaderboard
+            <TransitionLink href="/tournaments" className="btn-ghost">
+              Upcoming Events
             </TransitionLink>
           </Magnetic>
         </motion.div>

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import { getPayloadClient } from '@/lib/payload'
 import { PageHeader } from '@/components/site/PageHeader'
 import { Reveal } from '@/components/anim/Reveal'
@@ -10,7 +11,12 @@ export const revalidate = 60
 const trendIcon = { up: '▲', down: '▼', same: '—' } as const
 const trendColor = { up: 'text-green-neon', down: 'text-pink-neon', same: 'text-muted' } as const
 
+// Leaderboard launches next year — flip to true to bring the page back (and remove '/leaderboard' from HIDDEN_HREFS in lib/navigation.ts)
+const LEADERBOARD_LIVE = false
+
 export default async function LeaderboardPage() {
+  if (!LEADERBOARD_LIVE) notFound()
+
   const payload = await getPayloadClient()
   const { docs } = await payload
     .find({ collection: 'rankings', sort: 'rank', limit: 50 })

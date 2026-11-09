@@ -185,7 +185,6 @@ async function main() {
           kind: 'group',
           children: [
             { label: 'Tournaments', href: '/tournaments' },
-            { label: 'Leaderboard', href: '/leaderboard' },
             { label: 'News', href: '/news' },
             { label: 'Partnerships', href: '/partnerships' },
           ],

@@ -6,6 +6,8 @@ export type MenuItem = MenuLeaf | MenuGroup
 
 const CLUB_HREFS = ['/membership', '/tournaments', '/leaderboard']
 const CLUB_LABEL = 'The Club'
+// Pages switched off for now — hidden even if still present in the CMS menu
+const HIDDEN_HREFS = ['/leaderboard']
 
 type RawItem = {
   label?: string | null
@@ -21,11 +23,11 @@ export function normalizeNav(raw: RawItem[] | null | undefined, fallback: MenuIt
       if (!label) return null
       if (r.kind === 'group') {
         const children = (r.children ?? [])
-          .filter((c) => c.label?.trim() && c.href?.trim())
+          .filter((c) => c.label?.trim() && c.href?.trim() && !HIDDEN_HREFS.includes(c.href.trim()))
           .map((c) => ({ label: c.label!.trim(), href: c.href!.trim() }))
         return children.length ? { label, children } : null
       }
-      return r.href?.trim() ? { label, href: r.href.trim() } : null
+      return r.href?.trim() && !HIDDEN_HREFS.includes(r.href.trim()) ? { label, href: r.href.trim() } : null
     })
     .filter((i): i is MenuItem => !!i)
 

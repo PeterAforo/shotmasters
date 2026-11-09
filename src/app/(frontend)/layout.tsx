@@ -31,7 +31,6 @@ const FALLBACK_NAV = [
   { label: 'Membership', href: '/membership' },
   { label: 'The Club', children: [
     { label: 'Tournaments', href: '/tournaments' },
-    { label: 'Leaderboard', href: '/leaderboard' },
     { label: 'News', href: '/news' },
     { label: 'Partnerships', href: '/partnerships' },
   ]},
