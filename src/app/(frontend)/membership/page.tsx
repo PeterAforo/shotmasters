@@ -1,13 +1,10 @@
 import type { Metadata } from 'next'
-import { getPayloadClient } from '@/lib/payload'
 import { SectionHeading } from '@/components/site/SectionHeading'
 import { PageHeader } from '@/components/site/PageHeader'
 import { Reveal } from '@/components/anim/Reveal'
-import { formatGHS } from '@/lib/utils'
-import { JoinPlan } from './JoinPlan'
+import { TransitionLink } from '@/components/anim/PageTransition'
 
 export const metadata: Metadata = { title: 'Membership' }
-export const revalidate = 60
 
 export default async function MembershipPage({
   searchParams,
@@ -15,10 +12,6 @@ export default async function MembershipPage({
   searchParams: Promise<{ confirmed?: string }>
 }) {
   const sp = await searchParams
-  const payload = await getPayloadClient()
-  const { docs } = await payload
-    .find({ collection: 'membership-plans', sort: 'sortOrder', limit: 10 })
-    .catch(() => ({ docs: [] }))
 
   return (
     <>
@@ -30,65 +23,37 @@ export default async function MembershipPage({
         </div>
       )}
 
-      <SectionHeading
-        eyebrow="Membership"
-        title="CHOOSE YOUR TIER"
-        sub="Member rates on every table, priority booking windows, free tournament entries and more."
-        align="center"
-      />
-
-      <div className="grid gap-8 md:grid-cols-3">
-        {docs.map((p, i) => (
-          <Reveal key={p.id} delay={i * 0.1}>
-            <div
-              className={`card-surface relative flex h-full flex-col p-8 ${
-                p.featured
-                  ? 'border-cyan-neon/60 shadow-[0_0_60px_-12px_rgba(34,211,238,0.4)]'
-                  : ''
-              }`}
-            >
-              {p.featured && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-linear-to-r from-cyan-neon to-green-neon px-4 py-1 text-[10px] font-bold uppercase tracking-widest text-paper">
-                  Most Popular
-                </span>
-              )}
-              <h3 className="font-display text-3xl text-ink">{p.name}</h3>
-              {p.description && <p className="mt-2 text-sm text-muted">{p.description}</p>}
-              <div className="mt-6">
-                <span className="font-display text-5xl text-gradient-rainbow">{formatGHS(p.priceGHS)}</span>
-                <span className="ml-2 text-sm text-muted">per {p.interval?.replace('ly', '')}</span>
-              </div>
-              {p.perks?.length ? (
-                <ul className="mt-7 flex-1 space-y-3">
-                  {p.perks.map((perk, j) => (
-                    <li key={j} className="flex gap-3 text-sm text-muted">
-                      <span className="text-green-neon">✓</span> {perk.perk}
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <div className="flex-1" />
-              )}
-              <div className="mt-8">
-                <JoinPlan planId={p.id as number} planName={p.name} price={p.priceGHS ?? 0} />
-              </div>
-            </div>
-          </Reveal>
-        ))}
+      <div className="mx-auto max-w-3xl">
+        <SectionHeading eyebrow="Membership" title="BECOME PART OF SMCC" />
+        <Reveal>
+          <div className="space-y-5 text-base leading-relaxed text-muted">
+            <p>
+              Membership at Shot Masters Cue Club is about more than access to the tables. It
+              is a place in a growing community of players who share a love for cue sports —
+              from first-timers learning their stance to seasoned competitors chasing their
+              next title. Members take part in structured International 8-Ball league play,
+              club tournaments, coaching sessions and open nights, building friendships and
+              sportsmanship along the way.
+            </p>
+            <p>
+              As a member you help shape the club&apos;s future, from our anniversary events
+              and the December Cue Festival to the community and charity work we do through
+              sport. Membership categories and benefits are currently being finalised by the
+              Club, and full details will be published here soon. In the meantime, we would
+              love to hear from you — send us an enquiry and we&apos;ll keep you informed.
+            </p>
+          </div>
+        </Reveal>
       </div>
-
-      <Reveal className="mt-16 text-center text-sm text-muted">
-        Pay securely with MTN MoMo, Vodafone Cash or card via Paystack.
-      </Reveal>
 
       <div className="mx-auto mt-20 max-w-3xl">
         <Reveal>
           <div className="eyebrow">How to Apply</div>
           <p className="mt-3 text-sm leading-relaxed text-muted">
-            Pick a tier above, or send a membership enquiry and we&apos;ll walk you through
-            joining. Every application is reviewed by the Club — we&apos;ll get back to you
-            within a few days.
+            Send a membership enquiry and we&apos;ll walk you through joining. Every
+            application is reviewed by the Club — we&apos;ll get back to you within a few days.
           </p>
+          <TransitionLink href="/contact" className="btn-primary mt-6">Make an Enquiry</TransitionLink>
         </Reveal>
         <Reveal className="mt-10">
           <div className="eyebrow">Frequently Asked</div>
