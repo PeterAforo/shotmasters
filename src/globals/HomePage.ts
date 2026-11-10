@@ -1,10 +1,12 @@
 import type { GlobalConfig } from 'payload'
 import { publicRead, staffWrite } from '../access'
+import { revalidateGlobal } from './revalidate'
 
 export const HomePage: GlobalConfig = {
   slug: 'home-page',
   admin: { group: 'Settings' },
   access: { read: publicRead, update: staffWrite },
+  hooks: { afterChange: [revalidateGlobal('home-page')] },
   fields: [
     {
       name: 'heroSlides',

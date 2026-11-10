@@ -2,6 +2,15 @@ export function cn(...classes: (string | false | null | undefined)[]): string {
   return classes.filter(Boolean).join(' ')
 }
 
+/** Split a CMS phone field ("0264338227 / 0544949022") into display + tel: pairs. */
+export function phoneList(raw: string | null | undefined): { display: string; tel: string }[] {
+  return (raw ?? '')
+    .split(/[\/,;|]/)
+    .map((p) => p.trim())
+    .filter(Boolean)
+    .map((display) => ({ display, tel: display.replace(/[^\d+]/g, '') }))
+}
+
 export function formatGHS(amount: number | null | undefined): string {
   if (amount == null) return '—'
   return `GH₵ ${Number(amount).toLocaleString('en-GH', { minimumFractionDigits: 0 })}`

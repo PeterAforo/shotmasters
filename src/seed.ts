@@ -148,8 +148,8 @@ async function main() {
     data: {
       clubName: 'Shot Masters Cue Club',
       tagline: 'Accra\u2019s home of championship snooker',
-      phone: '+233 55 123 4567',
-      whatsappNumber: '233551234567',
+      phone: '0264338227 / 0544949022',
+      whatsappNumber: '233544949022',
       email: 'info@shotmasters.club',
       address: '12 Independence Avenue, Osu',
       city: 'Accra, Ghana',

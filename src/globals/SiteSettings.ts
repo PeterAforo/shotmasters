@@ -1,10 +1,12 @@
 import type { GlobalConfig } from 'payload'
 import { publicRead, staffWrite } from '../access'
+import { revalidateGlobal } from './revalidate'
 
 export const SiteSettings: GlobalConfig = {
   slug: 'site-settings',
   admin: { group: 'Settings' },
   access: { read: publicRead, update: staffWrite },
+  hooks: { afterChange: [revalidateGlobal('site-settings')] },
   fields: [
     { name: 'clubName', type: 'text', required: true, defaultValue: 'Shot Masters Cue Club' },
     { name: 'tagline', type: 'text', defaultValue: 'Accra’s home of championship snooker' },

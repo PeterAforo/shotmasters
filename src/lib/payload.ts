@@ -7,7 +7,7 @@ export const getPayloadClient = () => getPayload({ config })
 
 export const getSiteSettings = unstable_cache(
   async () => (await getPayloadClient()).findGlobal({ slug: 'site-settings' }),
-  ['site-settings'],
+  ['site-settings', 'v2'],
   { tags: ['site-settings'] },
 )
 
@@ -19,6 +19,6 @@ export const getNavigation = unstable_cache(
 
 export const getHomePage = unstable_cache(
   async () => (await getPayloadClient()).findGlobal({ slug: 'home-page' }),
-  ['home-page'],
+  ['home-page', 'v2'],
   { tags: ['home-page'] },
 )

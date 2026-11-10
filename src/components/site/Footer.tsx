@@ -1,4 +1,5 @@
 import { waLink, waMessages } from '@/lib/whatsapp'
+import { phoneList } from '@/lib/utils'
 
 type Settings = {
   clubName?: string | null
@@ -72,7 +73,11 @@ export function Footer({ settings, navItems }: { settings: Settings | null; navI
               ))}
             </ul>
             <div className="mt-5 space-y-2 text-sm">
-              {settings?.phone && <p className="text-white/60">{settings.phone}</p>}
+              {phoneList(settings?.phone || '0264338227 / 0544949022').map((p) => (
+                <a key={p.tel} href={`tel:${p.tel}`} className="block text-white/60 transition-colors hover:text-white">
+                  {p.display}
+                </a>
+              ))}
               {settings?.email && <p className="text-white/60">{settings.email}</p>}
               <a
                 href={waLink(waMessages.general)}

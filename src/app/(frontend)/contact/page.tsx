@@ -5,6 +5,7 @@ import { PageHeader } from '@/components/site/PageHeader'
 import { Reveal } from '@/components/anim/Reveal'
 import { ContactForm } from './ContactForm'
 import { waLink, waMessages } from '@/lib/whatsapp'
+import { phoneList } from '@/lib/utils'
 
 export const metadata: Metadata = { title: 'Contact' }
 
@@ -27,7 +28,13 @@ export default async function ContactPage() {
             </div>
             <div>
               <h3 className="eyebrow mb-2">Phone / WhatsApp</h3>
-              <p className="text-ink">{settings?.phone || '+233 55 000 0000'}</p>
+              <ul className="space-y-1">
+                {phoneList(settings?.phone || '0264338227 / 0544949022').map((p) => (
+                  <li key={p.tel}>
+                    <a href={`tel:${p.tel}`} className="text-ink transition-colors hover:text-cyan-neon">{p.display}</a>
+                  </li>
+                ))}
+              </ul>
               <a href={waLink(waMessages.general)} target="_blank" rel="noreferrer" className="mt-1 inline-block text-sm font-semibold text-green-neon hover:underline">
                 Message us on WhatsApp →
               </a>
